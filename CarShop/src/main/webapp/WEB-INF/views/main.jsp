@@ -7,10 +7,10 @@
 <title>main</title>
 </head>
 <body>
-	<%@ include file="header.jsp"%>
+	<%@ include file="includes/header.jsp"%>
 	<div class="container">
 		<div class="alert alert-dark" role="alert">Car Shop 방문을 환영합니다.</div>
 	</div>
-	<%@ include file="footer.jsp"%>
+	<%@ include file="includes/footer.jsp"%>
 </body>
 </html>
