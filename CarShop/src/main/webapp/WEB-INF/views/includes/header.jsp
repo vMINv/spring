@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@ taglib uri="http://www.springframework.org/tags/form" prefix="form" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -29,6 +30,8 @@
 						aria-current="page" href="/">홈</a></li>
 					<li class="nav-item"><a class="nav-link" href="/cars/list">차량
 							보기</a></li>
+					<li class="nav-item"><a class="nav-link" href="/cars/add">차량
+							등록</a></li>
 					<li class="nav-item"><a class="nav-link" href="/boards/list">게시판</a>
 					</li>
 				</ul>

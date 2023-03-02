@@ -4,7 +4,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Car List</title>
+<title>cars</title>
 </head>
 <body>
 	<%@ include file="../includes/header.jsp"%>
@@ -18,7 +18,11 @@
 				<div class="col-md-4">
 					<h3>${car.cid }</h3>
 					<p>${car.cname }</p>
-					<p>${car.cprice } 만원</p>
+					<p>${car.cprice }만원</p>
+					<p>
+						<a href="<c:url value="/cars/car?id=${car.cid }"/>"
+							class="btn btn-Secondaty" role="button">상세보기</a>
+					</p>
 				</div>
 			</c:forEach>
 		</div>
