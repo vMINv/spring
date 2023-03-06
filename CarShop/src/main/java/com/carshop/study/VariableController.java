@@ -14,12 +14,20 @@ public class VariableController {
 	@GetMapping("/names/{name}")
 	public String namesMethod(@PathVariable String name, Model model) {
 		model.addAttribute("data", "성명 : " + name);
+		
 		return "/study/name";
 	}
 	
+	
+	
 	@GetMapping("/names/{name}/{gender}")
-	public String namesMethod2(@PathVariable String name, @PathVariable String gender, Model model) {
-		model.addAttribute("data", "성명 : " + name + "<br>성별 : " + gender);
+	public String namesMethod2(
+			@PathVariable String name, 
+			@PathVariable String gender, 
+			Model model) {
+		model.addAttribute("data", "성명 : " + name + "<br>" +
+			                       "성별 : " + gender);
+		
 		return "/study/name";
 	}
 	
@@ -35,3 +43,13 @@ public class VariableController {
 	return "/study/name";
 }
 }
+
+
+
+
+
+
+
+
+
+

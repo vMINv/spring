@@ -7,18 +7,24 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 public class BoardRepositoryImpl implements BoardRepository {
-	
+
 	private List<BoardDTO> listOfBoards = new ArrayList<BoardDTO>();
 	
+	
 	public BoardRepositoryImpl() {
-		BoardDTO board1 = new BoardDTO("안녕하세요","처음 뵙겠습니다","작성자1","2023.02.27");
-		BoardDTO board2 = new BoardDTO("첫 글","첫 글입니다","작성자2","2023.02.27");
-		BoardDTO board3 = new BoardDTO("Hi","Hello","작성자3","2023.02.27");
 		
+		BoardDTO board1 = new BoardDTO("안녕하세요","반갑습니다 ","austin","02/28/2023");
+		BoardDTO board2 = new BoardDTO("hi","hello","andy","02/27/2023");
+		BoardDTO board3 = new BoardDTO("방가","신입회원입니다.","신입","02/26/2023");
+
 		listOfBoards.add(board1);
 		listOfBoards.add(board2);
 		listOfBoards.add(board3);
+	
 	}
+
+	// private String btitle, bcontent, bauthor, bdate;
+
 	
 	@Override
 	public List<BoardDTO> getAllBoardList() {

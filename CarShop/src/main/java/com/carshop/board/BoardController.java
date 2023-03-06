@@ -10,17 +10,29 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
 @Controller
-@RequestMapping(value="/boards", method=RequestMethod.GET)
+@RequestMapping(value="/board", method=RequestMethod.GET)
 public class BoardController {
-	
-	@Autowired
+
+	@Autowired  //DI
 	private BoardService boardService;
 	
+	
 	@GetMapping("/list")
-	public String CarList(Model model) {
+	public String BoardList(Model model) {
 		List<BoardDTO> list = boardService.getAllBoardList();
-		model.addAttribute("boardList",list);
-		return "board/boards";
+		model.addAttribute("boardList", list);
+		return "boards";
 	}
 	
+	@GetMapping("/test")
+	public String BoardTest() {
+		return "boardstest";
+	}
+	
+	@GetMapping("/boardfoldertest")
+	public String boardfoldertest() {
+		return "boards/boardfoldertest";
+	}
+	
+
 }

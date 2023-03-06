@@ -8,22 +8,28 @@ import org.springframework.stereotype.Service;
 @Service
 public class CarServiceImpl implements CarService {
 	
-	@Autowired//의존성 주입
+	@Autowired
 	private CarRepository carRepository;
 
 	@Override
 	public List<CarDTO> getAllCarList() {
-		
+		// TODO Auto-generated method stub
 		return carRepository.getAllCarList();
 	}
-
-	@Override
-	public CarDTO getCarById(String carId) {
-		CarDTO carById = carRepository.getCarById(carId);
-		return carById;
+	
+	public List<CarDTO> getCarListByCategory(String category) {
+		List<CarDTO> carsByCategory = carRepository.getCarListByCategory(category);
+		return carsByCategory;
 	}
-
-	@Override
+	
+	public CarDTO getCarById(String carId) {
+		
+		CarDTO carById = carRepository.getCarById(carId);
+		
+		return carById;
+		
+	}
+	
 	public void setNewCar(CarDTO car) {
 		carRepository.setNewCar(car);
 	}
