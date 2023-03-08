@@ -1,6 +1,7 @@
 package com.carshop.car;
 
 import java.io.File;
+import javax.annotation.Resource;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -49,21 +50,25 @@ public class CarController {
 		return "addCar";
 	}
 	
+	@Resource(name="uploadPath")
+	private String uploadPath;
+	
 	@PostMapping("/admin/add")
 	public String submitAddNewCar(@ModelAttribute("NewCar") CarDTO car) {
 		
-		MultipartFile cimage = car.getCimage();
+		MultipartFile carimage = car.getCimage();
 		
-		String saveName = cimage.getOriginalFilename();
-		File saveFile = new File("/resources/images", saveName);
+		String saveName = carimage.getOriginalFilename();
+		File saveFile = new File(uploadPath + "/images", saveName);
 		
-		if(cimage != null && !cimage.isEmpty()) {
+		if (carimage != null && !carimage.isEmpty()) {
 			try {
-				cimage.transferTo(saveFile);
-			} catch(Exception e) {
-				throw new RuntimeException("차량 이미지 업로드 실패");
+				carimage.transferTo(saveFile);
+			} catch (Exception e) {
+				throw new RuntimeException("차량 이미지 업로드가 실패했습니다.");
 			}
 		}
+		
 		carService.setNewCar(car);
 		return "redirect:/cars";
 	}

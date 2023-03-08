@@ -1,13 +1,17 @@
 package com.carshop.car;
 
+import java.io.Serializable;
+
 import org.springframework.web.multipart.MultipartFile;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
 
+@SuppressWarnings("serial")
 @AllArgsConstructor
 @Data
-public class CarDTO {
+public class CarDTO implements Serializable {
+	//private static final long serialVersionUID = 213;
 	
 	private String cid, cname, cprice, ccate, cdesc;
 
