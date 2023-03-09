@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<flow xmlns="http://www.springframework.org/schema/webflow"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/webflow
+      http://www.springframework.org/schema/webflow/spring-webflow.xsd">
+
+	<var name="ftest" class="com.carshop.domain.Ftest" />
+
+	<view-state id="ftest1">
+		<transition on="ftest2" to="ftest2" />
+	</view-state>
+
+	<view-state id="ftest2">
+		<transition on="ftest3" to="ftest3" />
+	</view-state>
+
+	<view-state id="ftest3">
+		<transition on="ftestCanceled" to="ftestCanceled" />
+	</view-state>
+
+	<end-state id="ftestCanceled" />
+
+	<global-transitions>
+		<transition on="cancel" to="ftestCanceled"></transition>
+	</global-transitions>
+
+
+</flow>

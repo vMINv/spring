@@ -3,6 +3,8 @@ package com.carshop.controller;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.carshop.exception.CartException;
+
 @Service
 public class CartServiceImpl implements CartService{
 	
@@ -28,6 +30,14 @@ public class CartServiceImpl implements CartService{
 	public void delete(String cartId) {
 		cartRepository.delete(cartId);
 		
+	}
+	
+	public Cart validateCart(String cartId) {
+		Cart cart = cartRepository.read(cartId);
+		if(cart==null || cart.getCartItems().size()==0) {
+			throw new CartException(cartId);
+		}
+		return cart;
 	}
 
 }

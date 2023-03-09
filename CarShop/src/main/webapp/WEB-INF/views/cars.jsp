@@ -25,7 +25,7 @@
 					<p>${car.cname}
 					<p>${car.cprice}만원
 					<p>
-						<a href="<c:url value="/car?id=${car.cid}"/>"
+						<a href="<c:url value="/cars/car?id=${car.cid}"/>"
 							class="btn btn-primary" role="button">상세보기 &raquo;</a>
 					</p>
 				</div>
