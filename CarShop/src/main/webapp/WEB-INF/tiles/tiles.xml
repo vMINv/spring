@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE tiles-definitions PUBLIC "-//Apache Software Foundation//DTD  Tiles Configuration 3.0//EN" 
+"http://tiles.apache.org/dtds/tiles-config_3_0.dtd">
+
+<tiles-definitions>
+
+<definition name="base-Template" template="/WEB-INF/tiles/layout/baseLayout.jsp">
+
+	<put-attribute name="title" value="test title"/>
+	<put-attribute name="heading" value=""/>
+	<put-attribute name="subheading" value=""/>
+	<put-attribute name="menu" value="/WEB-INF/tiles/template/header.jsp"/>
+	<put-attribute name="content" value=""/>
+	<put-attribute name="footer" value="/WEB-INF/tiles/template/footer.jsp"/>
+	
+</definition>
+<definition name="main" extends="base-Template">
+
+	<put-attribute name="title" value="환영합니다."/>
+	<put-attribute name="heading" value="방문하신 모든 분들을 환영합니다. "/>
+	<put-attribute name="subheading" value="Welcome to Carshop"/>
+	<put-attribute name="content" value="/WEB-INF/views/main.jsp"/>
+
+</definition>
+
+<definition name="cart" extends="base-Template">
+
+	<put-attribute name="title" value="환영"/>
+	<put-attribute name="heading" value=""/>
+	<put-attribute name="subheading" value="Carshop"/>
+	<put-attribute name="content" value="/WEB-INF/views/cart.jsp"/>
+
+</definition>
+
+
+
+</tiles-definitions>
