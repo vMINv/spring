@@ -9,4 +9,6 @@ public interface CarRepository {
 	CarDTO getCarById(String carId);
 
 	void setNewCar(CarDTO car);
+	
+	void removeCar(String cid);
 }

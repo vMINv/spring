@@ -34,4 +34,10 @@ public class CarServiceImpl implements CarService {
 		carRepository.setNewCar(car);
 	}
 
+	@Override
+	public void removeCar(String cid) {
+	    carRepository.removeCar(cid);
+	}
+	
+	
 }

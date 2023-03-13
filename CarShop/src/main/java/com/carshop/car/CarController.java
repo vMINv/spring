@@ -1,8 +1,9 @@
 package com.carshop.car;
 
 import java.io.File;
-import javax.annotation.Resource;
 import java.util.List;
+
+import javax.annotation.Resource;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -13,7 +14,9 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
+
 @RequestMapping("/cars")
 @Controller
 public class CarController {
@@ -53,17 +56,40 @@ public class CarController {
 	@Resource(name="uploadPath")
 	private String uploadPath;
 	
+	
+	
+//	@PostMapping("/add")
+//	public String submitAddNewCar(@ModelAttribute("NewCar") CarDTO car) {
+//		
+//		MultipartFile carimage = car.getCarimage();
+//		
+//		String saveName = carimage.getOriginalFilename();
+//		File saveFile = new File(uploadPath + "\\images", saveName);
+//		
+//		if (carimage != null && !carimage.isEmpty()) {
+//			try {
+//				carimage.transferTo(saveFile);
+//			} catch (Exception e) {
+//				throw new RuntimeException("차량 이미지 업로드가 실패했습니다.");
+//			}
+//		}
+//		
+//		carService.setNewCar(car);
+//		return "redirect:/cars";
+//	}
+	
 	@PostMapping("/add")
 	public String submitAddNewCar(@ModelAttribute("NewCar") CarDTO car) {
 		
-		MultipartFile carimage = car.getCimage();
+		MultipartFile carimage = car.getCarimage();
 		
 		String saveName = carimage.getOriginalFilename();
-		File saveFile = new File(uploadPath + "/images", saveName);
+		File saveFile = new File(uploadPath + "\\images", saveName);
 		
 		if (carimage != null && !carimage.isEmpty()) {
 			try {
 				carimage.transferTo(saveFile);
+				car.setCfilename(saveName);
 			} catch (Exception e) {
 				throw new RuntimeException("차량 이미지 업로드가 실패했습니다.");
 			}
@@ -78,23 +104,19 @@ public class CarController {
 		model.addAttribute("addTitle", "신규 차량 등록");
 	}
 	
-	
-	@GetMapping("/login")
-	public String loginMethod() {
-		
-		return "login";
+	@GetMapping("/product")
+	public String manageProduct(Model model) {
+	    List<CarDTO> list = carService.getAllCarList();
+	    model.addAttribute("carList", list);
+
+	    return "product";
 	}
-	
-	@GetMapping("/loginfailed")
-	public String loginfailedMethod() {
-		
-		return "login";
+
+	@ResponseBody
+	@RequestMapping("/remove")
+	public void removeCar(@RequestParam("cid") String cid) {
+	    carService.removeCar(cid);
 	}
-	
-	@GetMapping("/logout")
-	public String logoutMethod() {
-		
-		return "login";
-	}
+
 	
 }
