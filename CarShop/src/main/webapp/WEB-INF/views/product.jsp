@@ -1,13 +1,15 @@
-<%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ page contentType="text/html;charset=UTF-8" language="java"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
 <html>
 <head>
-    <title>Car Detail</title>
-    
-    <script src="https://code.jquery.com/jquery-3.6.3.min.js" integrity="sha256-pvPw+upLPUjgMXY0G+8O0xUf+/Im1MZjXxxgOcBQBXU=" crossorigin="anonymous"></script>
-    
-    <script>
+<title>Car Detail</title>
+
+<script src="https://code.jquery.com/jquery-3.6.3.min.js"
+	integrity="sha256-pvPw+upLPUjgMXY0G+8O0xUf+/Im1MZjXxxgOcBQBXU="
+	crossorigin="anonymous"></script>
+
+<script>
         function removeCar(cid) {
             $.ajax({
                 type:"POST",
@@ -30,40 +32,43 @@
     </script>
 </head>
 <body>
-<div class="alert alert-dark" role="alert">
-    <div class="container">
-        <h1>
-            제품 목록
-        </h1>
-    </div>
-</div>
+	<div class="alert alert-dark" role="alert">
+		<div class="container">
+			<h1>제품 목록</h1>
+		</div>
+	</div>
 
-<div class="container">
-    <div style="padding-top: 50px">
-        <table class="table table-hover">
-            <tr>
-                <th>차량 ID</th>
-                <th>이름</th>
-                <th>가격</th>
-                <th>종류</th>
-                <th>비고</th>
-            </tr>
-            <form:form name="removeForm" method="put">
-                <c:forEach items="${carList}" var="car">
-                    <tr>
-                        <td>${car.cid}</td>
-                        <td>${car.cname}</td>
-                        <td>${car.cprice}</td>
-                        <td>${car.ccate}</td>
-                        <td>
-                            <a href="javascript:removeCar('${car.cid}')" class="btn btn-danger btn-sm">삭제</a>
-                        </td>
-                    </tr>
-                </c:forEach>
-            </form:form>
-        </table>
-    </div>
-    <hr>
-</div>
+	<div class="container">
+		<div style="padding-top: 50px">
+			<table class="table table-hover">
+				<tr>
+					<th>차량 ID</th>
+					<th>이름</th>
+					<th>가격</th>
+					<th>종류</th>
+					<th>비고</th>
+				</tr>
+				<form:form name="removeForm" method="put">
+					<c:forEach items="${carList}" var="car">
+						<tr>
+							<td>${car.cid}</td>
+							<td>${car.cname}</td>
+							<td>${car.cprice}</td>
+							<td>${car.ccate}</td>
+							<td>
+								<p>
+									<a href="javascript:removeCar('${car.cid}')"
+										class="btn btn-danger btn-sm">삭제</a><!-- AJAX -->
+								<p>
+									<a href="<c:url value="/cars/update?id=${car.cid }"/>"
+										class="btn btn-success btn-sm">수정</a><!-- 기본 (AJAX x) -->
+							</td>
+						</tr>
+					</c:forEach>
+				</form:form>
+			</table>
+		</div>
+		<hr>
+	</div>
 </body>
 </html>

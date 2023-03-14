@@ -84,7 +84,7 @@ public class CarController {
 		MultipartFile carimage = car.getCarimage();
 		
 		String saveName = carimage.getOriginalFilename();
-		File saveFile = new File(uploadPath + "\\images", saveName);
+		File saveFile = new File(uploadPath + "/images", saveName);
 		
 		if (carimage != null && !carimage.isEmpty()) {
 			try {
@@ -118,5 +118,34 @@ public class CarController {
 	    carService.removeCar(cid);
 	}
 
+	@GetMapping("/update")
+	public String submitUpdateCar(@ModelAttribute("updateCar") CarDTO car, @RequestParam("id") String carId, Model model) {//객체, 조회, 보여주기 
+		
+		CarDTO carById = carService.getCarById(carId);//조회 
+		model.addAttribute("car", carById);//보여주기 
+		
+		return "updateCar";
+	}
 	
+	@PostMapping("/update")
+	public String submitUpdateCar(@ModelAttribute("updateCar") CarDTO car) {
+		
+		MultipartFile carimage = car.getCarimage();//파일 처리 
+		
+		String fname = carimage.getOriginalFilename();//파일명 처리 
+		File saveFile = new File(uploadPath + "/images", fname);
+		
+		if (carimage != null && !carimage.isEmpty()) {//이미지 없을 경우 
+			try {//이미지 있을 경우 
+				carimage.transferTo(saveFile);
+				car.setCfilename(fname);
+			} catch (Exception e) {
+				throw new RuntimeException("차량 이미지 업로드가 실패했습니다.");
+			}
+		}
+		
+		carService.setUpdateCar(car);//DB에 넣기 
+		
+		return "redirect:/cars";
+	}
 }

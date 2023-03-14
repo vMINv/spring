@@ -11,4 +11,6 @@ public interface CarRepository {
 	void setNewCar(CarDTO car);
 	
 	void removeCar(String cid);
+	
+	void setUpdateCar(CarDTO car);
 }

@@ -158,5 +158,28 @@ public class CarRepositoryImpl implements CarRepository {
 
 	    template.update(sql, cid);
 	}
+
+
+	@Override
+	public void setUpdateCar(CarDTO car) {
+		if(car.getCfilename() != null) {//사진 변경 시
+			String sql = "UPDATE car SET cname = ?, cprice = ?, ccate = ?, cdesc = ?, cfilename = ? WHERE cid = ?";
+			
+			template.update(sql, car.getCname(), 
+					car.getCprice(), 
+					car.getCcate(), 
+					car.getCdesc(), 
+					car.getCfilename(),
+					car.getCid());
+		} else if(car.getCfilename() == null) {//사진 변경 안할 시  
+			String sql = "UPDATE car SET cname = ?, cprice = ?, ccate = ?, cdesc = ? WHERE cid = ?";
+			
+			template.update(sql, car.getCname(), 
+					car.getCprice(), 
+					car.getCcate(), 
+					car.getCdesc(),
+					car.getCid());
+		}
+	}
 	
 }

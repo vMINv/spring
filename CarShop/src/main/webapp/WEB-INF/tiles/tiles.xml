@@ -87,6 +87,13 @@
         <put-attribute name="heading" value="주문 취소" />
         <put-attribute name="subheading" value="Invalid Cart" />
         <put-attribute name="content" value="/WEB-INF/flows/order/orderCartWarning.jsp" />
+    </definition>
+    
+    <definition name="updateCar" extends="base-Template">
+        <put-attribute name="title" value="Update Car" />
+        <put-attribute name="heading" value="정보 수정" />
+        <put-attribute name="subheading" value="update Car" />
+        <put-attribute name="content" value="/WEB-INF/views/updateCar.jsp" />
     </definition>   
      
 </tiles-definitions>
