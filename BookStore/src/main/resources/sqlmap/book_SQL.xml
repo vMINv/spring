@@ -10,4 +10,46 @@
 			(#{title}, #{category}, #{price})
 		]]>
 	</insert>
+	<select id="select_detail" parameterType="hashMap"
+		resultType="hashMap">
+		<![CDATA[
+			SELECT 
+			title, category, price, insert_date 
+			FROM book 
+			WHERE
+			book_id = #{bookId}
+		]]>
+	</select>
+	<update id="update" parameterType="hashMap">
+		<![CDATA[
+			UPDATE book
+			SET 
+			title = #{title}, category = #{category}, price = #{price} 
+			WHERE
+			book_id = #{bookId}
+		]]>
+	</update>
+	<!-- <select id="select_list" parameterType="hashMap" resultType="hashMap"> 
+		<![CDATA[ SELECT book_id, title, category, price, insert_date FROM book ORDER 
+		BY book_id desc ]]> </select> -->
+	<delete id="delete" parameterType="hashMap">
+		<![CDATA[
+			DELETE FROM book 
+			WHERE
+			book_id = #{bookId}
+		]]>
+	</delete>
+	<select id="select_list" parameterType="hashMap"
+		resultType="hashMap">
+		<![CDATA[
+			SELECT 
+			book_id, title, category, price, insert_date
+			FROM book 
+			WHERE 1=1
+		]]>
+		<if test="keyword != null and keyword != ''">
+			and (title like CONCAT('%',#{keyword},'%') or category like CONCAT('%',#{keyword},'%'))
+		</if>
+		order by insert_date desc
+	</select>
 </mapper>
