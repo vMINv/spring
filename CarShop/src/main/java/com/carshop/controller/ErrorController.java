@@ -6,6 +6,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 @ControllerAdvice
 public class ErrorController {
+
 	@ExceptionHandler(RuntimeException.class)
 	private ModelAndView handleErrorCommon(Exception e) {
 		ModelAndView modelAndView = new ModelAndView();
@@ -13,5 +14,6 @@ public class ErrorController {
 		modelAndView.setViewName("errorCommon");
 		
 		return modelAndView;
+		
 	}
 }

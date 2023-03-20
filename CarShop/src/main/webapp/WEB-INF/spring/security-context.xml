@@ -1,42 +1,58 @@
 <?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:security="http://www.springframework.org/schema/security"
+	xsi:schemaLocation="http://www.springframework.org/schema/security http://www.springframework.org/schema/security/spring-security.xsd
+		http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
 
-<beans:beans
-    xmlns="http://www.springframework.org/schema/security"
-    xmlns:beans="http://www.springframework.org/schema/beans"
-    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-    xsi:schemaLocation="http://www.springframework.org/schema/beans
- http://www.springframework.org/schema/beans/spring-beans.xsd
- http://www.springframework.org/schema/security
- http://www.springframework.org/schema/security/spring-security.xsd">
 
-<!--     <http auto-config="true" 기본 로그인 창 사용시 use-expressions="true">  -->
-    <http auto-config="true" use-expressions="true"> 
-	<intercept-url pattern="/cars/add" access="hasAuthority('ROLE_ADMIN')" />
-	<intercept-url pattern="/manager" access="hasRole('ROLE_MANAGER')" />
-	<intercept-url pattern="/member" access="isAuthenticated()" />
-	<intercept-url pattern="/cart/**" access="isAuthenticated()" />
-	<intercept-url pattern="/**" access="permitAll" />
 	
- 	<form-login login-page="/login"
-				default-target-url="/"
-				authentication-failure-url="/loginfailed"
-				username-parameter="username"
-				password-parameter="password" />
-	<csrf />
-	<logout logout-success-url="/logout" />
-    </http> 
+	<!--  각각의  interceptr-url, form-login,logout 은  내부적으로 Filter를 만들어 사용한다.  그래서 web.xml에서 이 모든걸 엮어줄 FilterChaing을 따로 설정해준다. -->
+	<!-- web.xml에서 사용하는 FilterChain의 대한 설정부분이다. -->
+	<security:http use-expressions="true">
+		<security:intercept-url pattern="/cars/add/**" access="hasAuthority('USER_MANAGER')" />
+		<security:intercept-url pattern="/**" access="permitAll" />
+			
+		         <security:form-login login-page="/login" 
+                    default-target-url="/cars"  
+                    authentication-failure-url="/loginfailed"  
+                    username-parameter="username"  
+                    password-parameter="password"/>  
+        <security:csrf />
+        <security:logout logout-success-url="/logout"/>
+        
+      	</security:http>	
+	<!-- form-login은 기본 로그인 폼 양식을 보여준다.logout은 로그아웃처리를.. -->
 
-    <authentication-manager> 
-        <authentication-provider>
-            <user-service>
+	
+	<!-- 암호화를 위한 passwordEncoder -->
+<bean id="bcryptPasswordEncoder" class="org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder"></bean>
+	
+	
+	<!-- DB연동은 data-source만 지정해주면 된다, 테이블이름은 정확히.   users 랑 authorities -->
+	<security:authentication-manager alias="authenticationManager">
+		<security:authentication-provider>
+			<security:password-encoder hash="bcrypt"/>
+			<security:jdbc-user-service data-source-ref="dataSource" 
+			users-by-username-query="SELECT username, password, enabled FROM users WHERE username=?" 
+			authorities-by-username-query="SELECT username, authority FROM users WHERE username=?" /> 
+	    	<security:password-encoder ref="passwordEncoder" />
+		</security:authentication-provider>
+	</security:authentication-manager>
+	
+    
+    
+    	<!-- 이것만 있으면  JDBC 코드 (Connection, Statement,ResultSet)로   DB연결 가능 -->
+	<!-- <bean id="dataSource"
+		class="org.apache.commons.dbcp2.BasicDataSource"
+		destroy-method="close">
+		<property name="driverClassName"
+			value="com.mysql.cj.jdbc.Driver" /> 
+		<property name="url" value="jdbc:mysql://localhost:3306/yoonkeunsoo?characterEncoding=utf8" />
+		<property name="username" value="yoonkeunsoo" />
+		<property name="password" value="guest0505" />
+		<property name="defaultAutoCommit" value="true" />
+	</bean> -->
 
-			<user name="admin" password="{noop}0000" authorities="ROLE_ADMIN, ROLE_USER"/>
-			<user name="manager" password="{noop}manager" authorities="ROLE_MANAGER, ROLE_USER"/>
-			<user name="guest" password="{noop}guest" authorities="ROLE_USER"/>
 
-
-            </user-service>
-        </authentication-provider>
-    </authentication-manager>
-</beans:beans>
-
+</beans>

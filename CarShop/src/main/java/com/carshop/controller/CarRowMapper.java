@@ -1,4 +1,4 @@
-package com.carshop.car;
+package com.carshop.controller;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;

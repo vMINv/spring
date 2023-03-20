@@ -7,13 +7,14 @@ import com.carshop.controller.CartService;
 
 @Service
 public class OrderServiceImpl implements OrderService {
-
+	
 	@Autowired
 	private OrderRepository orderRepository;
 	
 	@Autowired
 	private CartService cartService;
 	
+
 	@Override
 	public void confirmOrder(String cid, long quantity) {
 		// 추후에는 판매가 이루어지면 재고량에서 1개를 빼주는 계산 처리 

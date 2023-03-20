@@ -1,4 +1,4 @@
-package com.carshop.car;
+package com.carshop.controller;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -6,8 +6,10 @@ import java.util.List;
 import javax.sql.DataSource;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Primary;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
+
 
 @Repository
 public class CarRepositoryImpl implements CarRepository {
@@ -56,7 +58,6 @@ public class CarRepositoryImpl implements CarRepository {
 //	
 
 	
-	@Override	
 	public List<CarDTO> getCarListByCategory(String category) {
 		List<CarDTO> carsByCategory = new ArrayList<CarDTO>();
 		for (int i = 0; i < listOfCars.size(); i++) {
@@ -145,41 +146,44 @@ public class CarRepositoryImpl implements CarRepository {
 //		return listOfCars;
 //	}
 	
-	@Override
 	public List<CarDTO> getAllCarList() {
 		String sql = "SELECT * FROM car";
 		List<CarDTO> listOfCars = template.query(sql, new CarRowMapper());
 		return listOfCars;
 	}
 	
-	@Override
 	public void removeCar(String cid) {
 	    String sql = "DELETE FROM car where cid = ?";
 
 	    template.update(sql, cid);
 	}
-
-
-	@Override
+	
 	public void setUpdateCar(CarDTO car) {
-		if(car.getCfilename() != null) {//사진 변경 시
-			String sql = "UPDATE car SET cname = ?, cprice = ?, ccate = ?, cdesc = ?, cfilename = ? WHERE cid = ?";
+		
+		// 사진까지 변경할 경우
+		if (car.getCfilename() != null) {
+		
+		String sql = "UPDATE car SET cname=?, cprice=?, ccate=?, cdesc=?, cfilename=? WHERE cid=?";
+	
+		template.update(sql, car.getCname(),
+							 car.getCprice(),
+							 car.getCcate(),
+							 car.getCdesc(),
+							 car.getCfilename(),
+							 car.getCid());
+		// 사진은 변경하지 않는 경우
+		} else if(car.getCfilename() == null) {
 			
-			template.update(sql, car.getCname(), 
-					car.getCprice(), 
-					car.getCcate(), 
-					car.getCdesc(), 
-					car.getCfilename(),
-					car.getCid());
-		} else if(car.getCfilename() == null) {//사진 변경 안할 시  
-			String sql = "UPDATE car SET cname = ?, cprice = ?, ccate = ?, cdesc = ? WHERE cid = ?";
-			
-			template.update(sql, car.getCname(), 
-					car.getCprice(), 
-					car.getCcate(), 
-					car.getCdesc(),
-					car.getCid());
+			String sql = "UPDATE car SET cname=?, cprice=?, ccate=?, cdesc=? WHERE cid=?";
+
+			template.update(sql, car.getCname(),
+					 car.getCprice(),
+					 car.getCcate(),
+					 car.getCdesc(),
+					 car.getCid());
 		}
 	}
+	
+	
 	
 }

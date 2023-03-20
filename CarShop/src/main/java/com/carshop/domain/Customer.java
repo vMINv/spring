@@ -2,18 +2,16 @@ package com.carshop.domain;
 
 import java.io.Serializable;
 
-import lombok.Data;
-
 @SuppressWarnings("serial")
-@Data
 public class Customer implements Serializable {
 	
-	private String customerId;
-	private String name;
-	private Address address; // 고객주소 객체 
-	private String phone; 
+	private String customerId;  //고객id
+	private String name;        //고객성명
+	private Address address;    //고객주소 객체
+	private String phone;       //고객전번 
 	
-	public Customer() { // 기본 생성자 
+	//기본생성자
+	public Customer() {
 		this.address = new Address();
 	}
 
@@ -22,7 +20,47 @@ public class Customer implements Serializable {
 		this.customerId = customerId;
 		this.name = name;
 	}
-	
+
+	public String getCustomerId() {
+		return customerId;
+	}
+
+	public void setCustomerId(String customerId) {
+		this.customerId = customerId;
+	}
+
+	public String getName() {
+		return name;
+	}
+
+	public void setName(String name) {
+		this.name = name;
+	}
+
+	public Address getAddress() {
+		return address;
+	}
+
+	public void setAddress(Address address) {
+		this.address = address;
+	}
+
+	public String getPhone() {
+		return phone;
+	}
+
+	public void setPhone(String phone) {
+		this.phone = phone;
+	}
+
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = 1;
+		result = prime * result + ((customerId == null) ? 0 : customerId.hashCode());
+		return result;
+	}
+
 	@Override
 	public boolean equals(Object obj) {
 		if (this == obj)
@@ -40,13 +78,7 @@ public class Customer implements Serializable {
 		return true;
 	}
 
-	@Override
-	public int hashCode() {
-		final int prime = 31;
-		int result = 1;
-		result = prime * result + ((customerId == null) ? 0 : customerId.hashCode());
-		return result;
-	}
+	
 	
 	
 }

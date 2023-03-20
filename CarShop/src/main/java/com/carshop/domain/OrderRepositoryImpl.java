@@ -7,7 +7,7 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 public class OrderRepositoryImpl implements OrderRepository {
-	
+
 	private Map<Long, Order> listOfOrders;
 	private long nextOrderId;
 	
@@ -16,10 +16,11 @@ public class OrderRepositoryImpl implements OrderRepository {
 		nextOrderId = 2000;
 	}
 
-	@Override
+
 	public Long saveOrder(Order order) {
 		order.setOrderId(getNextOrderId());
 		listOfOrders.put(order.getOrderId(), order);
+		
 		return order.getOrderId();
 	}
 
