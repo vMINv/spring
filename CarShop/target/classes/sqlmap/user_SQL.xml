@@ -2,9 +2,8 @@
 <!DOCTYPE  mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="users">
 
-	<insert id="insert"
-		parameterType="com.carshop.users.User" useGeneratedKeys="true"
-		keyProperty="username">
+	<insert id="insert" parameterType="com.carshop.users.User"
+		useGeneratedKeys="true" keyProperty="username">
 		<![CDATA[
 			INSERT INTO users
 			(username, password, authority, enabled, uname, uemail)
@@ -12,29 +11,26 @@
 			(#{username}, #{password}, "USER", 1, #{uname}, #{uemail})
 		]]>
 	</insert>
-	
-	<select id="select_list"
-		resultType="com.carshop.users.User"><!-- 전부 -->
+
+	<select id="select_list" resultType="com.carshop.users.User"><!-- 전부 -->
 		<![CDATA[
 			SELECT * FROM users ORDER BY uno DESC
 		]]>
 	</select>
-	
-	<update id="updateAuth" 
-		parameterType="hashMap"><!-- 여러개 (한개X, 전부X) -->
+
+	<update id="updateAuth" parameterType="hashMap"><!-- 여러개 (한개X, 전부X) -->
 		<![CDATA[
 			UPDATE users 
 			SET authority = #{authority}
 			WHERE username = #{username}			
 		]]>
 	</update>
-	
-	<delete id="delete"
-		parameterType="String"><!-- 한개 -->
+
+	<delete id="delete" parameterType="String"><!-- 한개 -->
 		<![CDATA[
 			DELETE FROM users
 			WHERE username = #{username}
 		]]>
 	</delete>
-	
-	</mapper>
+
+</mapper>

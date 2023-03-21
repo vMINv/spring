@@ -1,25 +1,49 @@
 package com.carshop.board;
 
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.carshop.board.BoardDTO;
-import com.carshop.board.BoardRepository;
-import com.carshop.board.BoardService;
-
 @Service
 public class BoardServiceImpl implements BoardService {
-	
-	@Autowired	//DI 의존성 주입  IoC  제어의 역전
-	private BoardRepository boardRepository;
 
+	@Autowired
+	BoardRepository boardRepository;
+	
+	@Override
+	public void setNewBoard(Board board) {
+		boardRepository.setNewBoard(board);
+	}
 
 	@Override
-	public List<BoardDTO> getAllBoardList() {
-		// TODO Auto-generated method stub
+	public List<Board> getAllBoardList() {
 		return boardRepository.getAllBoardList();
 	}
 
+	@Override
+	public Board getBoardById(int bid) {
+		return boardRepository.getBoardById(bid);
+	}
+	
+	@Override
+	public void updateAuth(Map<String, Object> auth) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void updateEnabled(Map<String, Object> enable) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void removeBoard(String username) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	
 }

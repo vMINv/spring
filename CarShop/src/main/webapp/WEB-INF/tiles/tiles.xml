@@ -138,4 +138,26 @@
 		<put-attribute name="content"
 			value="/WEB-INF/views/users/list.jsp" />
 	</definition>
+	
+	<definition name="boards/addBoard" extends="base-Template">
+		<put-attribute name="title" value="Member" />
+		<put-attribute name="heading" value="게시물 등록" />
+		<put-attribute name="subheading" value="Add Board" />
+		<put-attribute name="content"
+			value="/WEB-INF/views/boards/addBoard.jsp" />
+	</definition>
+	<definition name="boards/list" extends="base-Template">
+		<put-attribute name="title" value="Member" />
+		<put-attribute name="heading" value="게시물 리스트" />
+		<put-attribute name="subheading" value="Board List" />
+		<put-attribute name="content"
+			value="/WEB-INF/views/boards/list.jsp" />
+	</definition>
+	<definition name="boards/board" extends="base-Template">
+		<put-attribute name="title" value="Member" />
+		<put-attribute name="heading" value="게시물" />
+		<put-attribute name="subheading" value="Board" />
+		<put-attribute name="content"
+			value="/WEB-INF/views/boards/board.jsp" />
+	</definition>
 </tiles-definitions>
