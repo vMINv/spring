@@ -14,4 +14,6 @@ public interface UserRepository {
 	void updateAuth(Map<String, Object> auth);
 	
 	void updateEnabled(Map<String, Object> enable);
+	
+	User existUsername(String email);
 }

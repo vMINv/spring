@@ -160,4 +160,12 @@
 		<put-attribute name="content"
 			value="/WEB-INF/views/boards/board.jsp" />
 	</definition>
+	
+	<definition name="users/joinkakao" extends="base-Template">
+		<put-attribute name="title" value="Member" />
+		<put-attribute name="heading" value="Kakao 회원 가입" />
+		<put-attribute name="subheading" value="Join Member" />
+		<put-attribute name="content"
+			value="/WEB-INF/views/users/joinkakao.jsp" />
+	</definition>
 </tiles-definitions>

@@ -15,7 +15,6 @@ public class UserServiceImpl implements UserService {
 	@Override
 	public void setNewUser(User user) {
 		userRepository.setNewUser(user);
-
 	}
 
 	@Override
@@ -36,6 +35,11 @@ public class UserServiceImpl implements UserService {
 	@Override
 	public void updateEnabled(Map<String, Object> enable) {
 		this.userRepository.updateEnabled(enable);
+	}
+
+	@Override
+	public User existUsername(String email) {
+		return userRepository.existUsername(email);
 	}
 
 }

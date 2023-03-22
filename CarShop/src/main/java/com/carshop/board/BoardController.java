@@ -38,9 +38,7 @@ public class BoardController {
 	
 	@GetMapping("/board")
 	public String requestBoardById(@RequestParam("bid") int bid, Model model) {
-		System.out.print(bid);
 		Board boardById = boardService.getBoardById(bid);
-		System.out.print(boardById);
 		model.addAttribute("board", boardById);
 		return "boards/board";
 	}

@@ -25,7 +25,7 @@ public class BoardRepositoryImpl implements BoardRepository {
 	
 	@Override
 	public Board getBoardById(int bid) {
-		return this.sqlSessionTemplate.selectOne("board.select_detail");
+		return this.sqlSessionTemplate.selectOne("board.select_detail", bid);
 	}
 
 	@Override

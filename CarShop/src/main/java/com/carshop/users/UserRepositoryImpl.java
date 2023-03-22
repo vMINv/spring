@@ -37,4 +37,9 @@ public class UserRepositoryImpl implements UserRepository {
 	public void updateEnabled(Map<String, Object> enable) {
 		this.sqlSessionTemplate.update("users.updateEnabled", enable);
 	}
+
+	@Override
+	public User existUsername(String email) {
+		return this.sqlSessionTemplate.selectOne("users.select_email", email);
+	}
 }
