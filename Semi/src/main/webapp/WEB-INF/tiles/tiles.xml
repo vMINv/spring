@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE tiles-definitions PUBLIC "-//Apache Software Foundation//DTD  Tiles Configuration 3.0//EN" 
+"http://tiles.apache.org/dtds/tiles-config_3_0.dtd">
+
+<tiles-definitions>
+	<definition name="base-Template"
+		template="/WEB-INF/tiles/layout/baseLayout.jsp">
+		<put-attribute name="title" value="Sample Title" />
+		<put-attribute name="heading" value="" />
+		<put-attribute name="menu"
+			value="/WEB-INF/tiles/template/header.jsp" />
+		<put-attribute name="content" value="" />
+		<put-attribute name="footer"
+			value="/WEB-INF/tiles/template/footer.jsp" />
+	</definition>
+
+	<definition name="users/join" extends="base-Template">
+		<put-attribute name="title" value="Join" />
+		<put-attribute name="heading" value="Join" />
+		<put-attribute name="content"
+			value="/WEB-INF/views/users/join.jsp" />
+	</definition>
+</tiles-definitions>

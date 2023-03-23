@@ -92,12 +92,39 @@ body {
 	border-top-right-radius: 0;
 }
 </style>
+</head>
+<body class="text-center">
 <!-- AJAX JQuery -->
 <script src="https://code.jquery.com/jquery-3.6.3.min.js" integrity="sha256-pvPw+upLPUjgMXY0G+8O0xUf+/Im1MZjXxxgOcBQBXU=" crossorigin="anonymous"></script>
 <!-- Kakao SDK -->
 <script src="https://developers.kakao.com/sdk/js/kakao.js"></script>
-<script>
-/* kakaologin 옛날 방식 */
+<!-- Naver -->
+<script type="text/javascript" src="https://static.nid.naver.com/js/naverLogin_implicit-1.0.3.js" charset="utf-8"></script>
+
+	<main class="form-signin w-100 m-auto">
+		<form action="/login" method="post">
+			<img class="mb-4" src="/resources/images/kermit.jpeg" width="72" height="57">
+			<h1 class="h3 mb-3 fw-normal">로그인 하세요</h1>
+			<div class="form-floating">
+				<input type="text" name="username" class="form-control" placeholder="아이디를 입력하세요">
+				<label>아이디</label>
+			</div>
+			<div class="form-floating">
+				<input type="password" name="password" class="form-control" placeholder="암호를 입력하세요">
+				<label>암호</label>
+			</div>
+			<div class="checkbox mb-3">
+				<label><input type="checkbox" value="remember-me">Remember me</label>
+			</div>
+			<button class="w-100 btn btn-lg btn-primary" type="submit">로그인</button>
+			<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}" /> 
+			<a href="javascript:kakaologin()"><img src="/resources/images/kakao_login_medium_wide.png"></a>
+			<div id="naver_id_login"></div>
+			<p class="mt-5 mb-3 text-muted">&copy; 2017–2022</p>
+		</form>
+	</main>
+	<script>
+/* kakao login 옛날 방식 */
 Kakao.init('fc7abe9b9479ffa297474094a4964dcf');
 
 function kakaologin() {
@@ -144,29 +171,17 @@ function kakaoProcess(nickname, email, gender){
 		}
 	})
 }
+
+/* Naver Login */
+var naver_id_login = new naver_id_login("LKhaPhifQ58WHg9YV_ZV", "http://localhost:8080/login");
+var state = naver_id_login.getUniqState();
+naver_id_login.setButton("white", 2,40);
+naver_id_login.setDomain("http://localhost:8080");
+naver_id_login.setState(state);
+naver_id_login.setPopup();
+naver_id_login.init_naver_id_login();
+var name = naver_id_login.getProfileData('name');
+var email = naver_id_login.getProfileData('email');
 </script>
-</head>
-<body class="text-center">
-	<main class="form-signin w-100 m-auto">
-		<form action="/login" method="post">
-			<img class="mb-4" src="/resources/images/kermit.jpeg" width="72" height="57">
-			<h1 class="h3 mb-3 fw-normal">로그인 하세요</h1>
-			<div class="form-floating">
-				<input type="text" name="username" class="form-control" placeholder="아이디를 입력하세요">
-				<label>아이디</label>
-			</div>
-			<div class="form-floating">
-				<input type="password" name="password" class="form-control" placeholder="암호를 입력하세요">
-				<label>암호</label>
-			</div>
-			<div class="checkbox mb-3">
-				<label><input type="checkbox" value="remember-me">Remember me</label>
-			</div>
-			<button class="w-100 btn btn-lg btn-primary" type="submit">로그인</button>
-			<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}" /> 
-			<a href="javascript:kakaologin()"><img src="/resources/images/kakao_login_medium_wide.png"></a>
-			<p class="mt-5 mb-3 text-muted">&copy; 2017–2022</p>
-		</form>
-	</main>
 </body>
 </html>
