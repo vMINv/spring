@@ -11,8 +11,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import com.semi.model.User;
 import com.semi.service.UserService;
 
-@Controller
 @RequestMapping("users")
+@Controller
 public class UserController {
 
 	@Autowired
@@ -36,6 +36,7 @@ public class UserController {
 		
 		userService.join(user);
 		
-		return "redirect:/";
+		return "redirect:/login";
 	}
+	
 }

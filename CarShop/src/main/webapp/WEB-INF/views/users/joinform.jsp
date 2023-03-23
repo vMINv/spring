@@ -9,7 +9,6 @@
 <title>회원 등록</title>
 </head>
 <body>
-
 	<form:form modelAttribute="NewUser"
 		action="./join?${_csrf.parameterName}=${_csrf.token}"
 		class="form-horizontal" method="post">
@@ -25,6 +24,5 @@
 			<input type="submit" class="btn btn-primary" value="등록" />
 		</fieldset>
 	</form:form>
-
 </body>
 </html>

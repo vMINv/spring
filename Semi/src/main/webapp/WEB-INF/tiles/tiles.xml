@@ -20,4 +20,11 @@
 		<put-attribute name="content"
 			value="/WEB-INF/views/users/join.jsp" />
 	</definition>
+	
+	<definition name="login" extends="base-Template">
+		<put-attribute name="title" value="Login" />
+		<put-attribute name="heading" value="Login" />
+		<put-attribute name="content"
+			value="/WEB-INF/views/login.jsp" />
+	</definition>
 </tiles-definitions>
