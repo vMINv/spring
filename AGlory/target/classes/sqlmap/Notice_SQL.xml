@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE  mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="notice">
+	<insert id="insert" 
+			parameterType="com.aglory.notice.Notice"
+			useGeneratedKeys="true" 
+			keyProperty="nid"><!-- 전부 -->
+		<![CDATA[
+			INSERT INTO glorynotice
+			(ntitle, ncontent, ncate, nwriter)
+			VALUES
+			(#{ntitle}, #{ncontent}, #{ncate}, #{nwriter})
+		]]>
+	</insert>
+	
+	<select id="select_list" 
+			resultType="com.aglory.notice.Notice">
+		<![CDATA[
+			SELECT * 
+			FROM glorynotice 
+			ORDER BY nid DESC
+		]]>
+	</select>
+
+	<select id="select_detail" 
+			parameterType="String"
+			resultType="com.aglory.notice.Notice">
+		<![CDATA[
+			SELECT * 
+			FROM glorynotice 
+			WHERE nid = #{nid}
+		]]>
+	</select>
+	
+	<update id="update_notice"
+			parameterType="hashMap">
+		<![CDATA[
+			UPDATE glorynotice 
+			SET 
+			ntitle = #{ntitle},
+			ncontent = #{ncontent},
+			ncate = #{ncate}
+			WHERE nid = #{nid}			
+		]]>
+	</update>
+	
+	<update id="update_category"
+			parameterType="hashMap">
+		<![CDATA[
+			UPDATE glorynotice 
+			SET ncate = #{ncate}
+			WHERE nid = #{nid}			
+		]]>
+	</update>
+	
+	<delete id="delete"
+			parameterType="String">
+		<![CDATA[
+			DELETE FROM glorynotice 
+			WHERE nid = #{nid}			
+		]]>
+	</delete>
+</mapper>

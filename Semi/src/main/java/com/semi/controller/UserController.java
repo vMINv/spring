@@ -18,8 +18,8 @@ public class UserController {
 	@Autowired
 	UserService userService;
 	
-	@Autowired
-	BCryptPasswordEncoder bCryptPasswordEncoder;
+//	@Autowired
+//	BCryptPasswordEncoder bCryptPasswordEncoder;
 	
 	@GetMapping("/join")
 	public String joinForm(@ModelAttribute("NewUser") User user) { 
@@ -30,9 +30,9 @@ public class UserController {
 	@PostMapping("/join")
 	public String submitForm(@ModelAttribute("NewUser") User user) {
 		
-		String encodedPassword = bCryptPasswordEncoder.encode(user.getPassword());
-		
-		user.setPassword(encodedPassword);
+//		String encodedPassword = bCryptPasswordEncoder.encode(user.getPassword());
+//		
+//		user.setPassword(encodedPassword);
 		
 		userService.join(user);
 		

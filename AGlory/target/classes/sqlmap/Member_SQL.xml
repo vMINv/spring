@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE  mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="member">
+	<insert id="insert" 
+			parameterType="com.aglory.member.Member"
+			useGeneratedKeys="true" 
+			keyProperty="username"><!-- 전부 -->
+		<![CDATA[
+			INSERT INTO glorymember
+			(username, password, mname, memail, mtel)
+			VALUES
+			(#{username}, #{password}, #{mname}, #{memail}, #{mtel})
+		]]>
+	</insert>
+	
+	<select id="select_list" 
+			resultType="com.aglory.member.Member">
+		<![CDATA[
+			SELECT * 
+			FROM glorymember 
+			ORDER BY mid DESC
+		]]>
+	</select>
+
+	<select id="select_detail" 
+			parameterType="String"
+			resultType="com.aglory.member.Member">
+		<![CDATA[
+			SELECT * 
+			FROM glorymember 
+			WHERE mid = #{mid}
+		]]>
+	</select>
+</mapper>

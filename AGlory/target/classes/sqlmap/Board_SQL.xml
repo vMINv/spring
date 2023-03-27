@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE  mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="board">
+	
+	<insert id="insert" 
+			parameterType="com.aglory.board.Board"
+			useGeneratedKeys="true" 
+			keyProperty="bid"><!-- 전부 -->
+		<![CDATA[
+			INSERT INTO gloryboard
+			(btitle, bcontent, bcate, bwriter)
+			VALUES
+			(#{btitle}, #{bcontent}, #{bcate}, #{bwriter})
+		]]>
+	</insert>
+
+	<insert id="insert_reply" 
+			parameterType="hashMap"
+			useGeneratedKeys="true" 
+			keyProperty="bid">
+		<![CDATA[
+			INSERT INTO gloryboard
+			(bpid, bcontent, bwriter)
+			VALUES
+			(#{bid}, #{bcontent}, #{bwriter})
+		]]>
+	</insert>
+
+	<select id="select_list" 
+			resultType="com.aglory.board.Board">
+		<![CDATA[
+			SELECT * 
+			FROM gloryboard 
+			WHERE bpid = '0'
+			ORDER BY bid DESC
+		]]>
+	</select>
+
+	<select id="select_detail" 
+			parameterType="String"
+			resultType="com.aglory.board.Board">
+		<![CDATA[
+			SELECT * 
+			FROM gloryboard 
+			WHERE bid = #{bid}
+		]]>
+	</select>
+
+	<select id="select_reply" 
+			parameterType="String" 
+			resultType="com.aglory.board.Board">
+		<![CDATA[
+			SELECT * 
+			FROM gloryboard
+			WHERE bpid = #{bid}
+			ORDER BY bid DESC
+		]]>
+	</select>
+	
+	<!-- <update id="update_board" 
+			parameterType="hashMap">
+		<![CDATA[
+			UPDATE gloryboard 
+			SET bcontent = #{bcontent}
+			WHERE bid = #{bid}
+		]]>
+	</update>
+	
+	<update id="update_reply" 
+			parameterType="hashMap">여러개 (전부X)
+		<![CDATA[
+			UPDATE gloryboard 
+			SET bcontent = #{bcontent}
+			WHERE bpid = #{bpid}
+		]]>
+	</update>
+	
+	<delete id="delete" 
+			parameterType="String">한개
+		<![CDATA[
+			DELETE FROM gloryboard
+			WHERE bid = #{bid}
+		]]>
+	</delete> -->
+	
+		<!-- <update id="update_hate" parameterType="hashMap">
+			<![CDATA[
+				UPDATE board SET
+				bhate = bhate + 1
+				WHERE bid = #{bid}
+
+			]]>
+	</update>
+		<update id="update_view" parameterType="hashMap">
+			<![CDATA[
+				UPDATE board SET
+				bview = bview + 1
+				WHERE bid = #{bid}
+
+			]]>
+	</update> -->
+	
+</mapper>
