@@ -61,15 +61,20 @@
 											<tr>
 												<td>${notice.nid}</td>
 												<td><a href="/notice/detail?nid=${notice.nid}">${notice.ntitle}</a></td>
-												<td><select
-													onchange="updateCategory('${notice.nid }', this)"
-													class="form-select form-select-sm"
-													aria-label=".form-select-sm example">
-														<option selected>${notice.ncate}</option>
-														<option value="버그처리">버그처리</option>
-														<option value="선택기능">선택기능</option>
-														<option value="기타">기타</option>
-												</select></td>
+												<%-- <sec:authentication property="principal" var="member" />
+												<c:if test="${member.username=='admin' }"> --%>
+													<td><select
+														onchange="updateCategory('${notice.nid }', this)"
+														class="form-select form-select-sm"
+														aria-label=".form-select-sm example">
+															<option value="버그처리" ${notice.ncate=='버그처리' ? 'selected' : '' }>버그처리</option>
+															<option value="선택기능" ${notice.ncate=='선택기능' ? 'selected' : '' }>선택기능</option>
+															<option value="기타" ${notice.ncate=='기타' ? 'selected' : '' }>기타</option>
+													</select></td>
+												<%-- </c:if>
+												<c:if test="${member.username!='admin' }">
+													<td>${notice.ncate}</td>
+												</c:if> --%>
 												<td>${notice.ndate}</td>
 											</tr>
 										</c:forEach>
@@ -132,7 +137,7 @@
 			url : "/notice/list",
 			data : {
 				nid : nid,
-				category : e.value
+				ncate : e.value
 			},
 			/* beforeSend : function(xhr) {
 				xhr.setRequestHeader("${_csrf.headerName}", "${_csrf.token}");

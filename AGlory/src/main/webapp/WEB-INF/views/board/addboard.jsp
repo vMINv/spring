@@ -50,7 +50,7 @@
 								</div>
 								<div class="form-group">
 									<label>제목</label> 
-									<form:input path="btitle" type="text" class="form-control" />
+									<form:input path="btitle" type="text" class="form-control" required="true" />
 								</div>
 								<div class="form-group">
 									<label>내용</label>
@@ -58,7 +58,7 @@
 								</div>
 								<div class="form-group">
 									<label>유형</label>
-									<form:select path="bcate" class="form-control custom-select">
+									<form:select path="bcate" class="form-control custom-select" required="true">
 										<form:option value="" disabled="true" selected="true">선택하세요</form:option>
 										<form:option value="버그처리">버그처리</form:option>
 										<form:option value="선택기능">선택기능</form:option>
@@ -88,7 +88,7 @@
 <script src="/resources/Admin/dist/js/adminlte.min.js"></script>
 <script>
 	$('#summernote').summernote({
-	  placeholder: '작성글',
+	  placeholder: '입력란을 반드시 채워주세요.',
 	  tabsize: 2,
 	  height: 120,
 	  toolbar: [
