@@ -11,7 +11,7 @@ public interface NoticeService {
 	
 	Notice getNoticeById(String nid);
 	
-	void editNotice(Map<String, Object> notice); 
+	void editNotice(Notice notice); 
 	
 	void editCategory(Map<String, Object> category);
 

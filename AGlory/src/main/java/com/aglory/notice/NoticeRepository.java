@@ -14,7 +14,7 @@ public interface NoticeRepository {
 	Notice getNoticeById(String nid);//공지 하나 
 	
 	//U
-	void editNotice(Map<String, Object> notice);//공지 수정 
+	void editNotice(Notice notice);//공지 수정 
 	
 	void editCategory(Map<String, Object> category);//공지 category 수정
 

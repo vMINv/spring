@@ -13,7 +13,7 @@
 </head>
 <body>
 <%@ include file="../header.jsp" %>
-	
+
 	<!-- content-wrapper -->
 	<div class="content-wrapper">
 		<!-- content-header -->
@@ -61,7 +61,15 @@
 											<tr>
 												<td>${notice.nid}</td>
 												<td><a href="/notice/detail?nid=${notice.nid}">${notice.ntitle}</a></td>
-												<td>${notice.ncate}</td>
+												<td><select
+													onchange="updateCategory('${notice.nid }', this)"
+													class="form-select form-select-sm"
+													aria-label=".form-select-sm example">
+														<option selected>${notice.ncate}</option>
+														<option value="버그처리">버그처리</option>
+														<option value="선택기능">선택기능</option>
+														<option value="기타">기타</option>
+												</select></td>
 												<td>${notice.ndate}</td>
 											</tr>
 										</c:forEach>
@@ -117,6 +125,28 @@
 			}
 		).buttons().container().appendTo('#example1_wrapper .col-md-6:eq(0)');
 	});
+	
+	function updateCategory(nid, e) {
+		$.ajax({
+			type : "POST",
+			url : "/notice/list",
+			data : {
+				nid : nid,
+				category : e.value
+			},
+			/* beforeSend : function(xhr) {
+				xhr.setRequestHeader("${_csrf.headerName}", "${_csrf.token}");
+			}, */
+			success : function(result) {
+				alert("유형 정보 변경이 완료되었습니다.")
+			},
+			error : function(request, status, error) {
+				alert(request.status + " " + request.responseText);
+			}
+		})
+
+		window.location.reload();
+	}
 </script>
 </body>
 </html>

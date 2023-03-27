@@ -29,7 +29,7 @@ public class NoticeRepositoryImpl implements NoticeRepository {
 	}
 
 	@Override
-	public void editNotice(Map<String, Object> notice) {
+	public void editNotice(Notice notice) {
 		this.sqlSessionTemplate.update("notice.update_notice", notice);
 	}
 

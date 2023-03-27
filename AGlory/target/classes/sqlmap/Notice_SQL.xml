@@ -33,7 +33,7 @@
 	</select>
 	
 	<update id="update_notice"
-			parameterType="hashMap">
+			parameterType="com.aglory.notice.Notice">
 		<![CDATA[
 			UPDATE glorynotice 
 			SET 

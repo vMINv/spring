@@ -27,7 +27,6 @@ public class NoticeController {
 	
 	@PostMapping("/addnotice")
 	public String submitAddNoticeForm(@ModelAttribute("NewNotice") Notice notice) {
-		
 		noticeService.setNewNotice(notice);
 		
 		return "redirect:/notice/list";
@@ -61,13 +60,15 @@ public class NoticeController {
 	}
 	
 	@GetMapping("/edit")
-	public String requestEditNotice(@ModelAttribute("EditNotice") Notice notice) {
+	public String requestEditNotice(@RequestParam("nid") String nid, Model model, @ModelAttribute("EditNotice") Notice notice) {
+		Notice noticeById = noticeService.getNoticeById(nid);
+		model.addAttribute("notice", noticeById);
+
 		return "notice/editnotice";
 	}
 	
 	@PostMapping("/edit")
-	public String submitEditNotice(@RequestParam Map<String, Object> notice) {
-		
+	public String submitEditNotice(@ModelAttribute("EditNotice") Notice notice) {
 		noticeService.editNotice(notice);
 		
 		return "redirect:/notice/list";

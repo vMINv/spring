@@ -28,7 +28,7 @@ public class NoticeServiceImpl implements NoticeService {
 	}
 
 	@Override
-	public void editNotice(Map<String, Object> notice) {
+	public void editNotice(Notice notice) {
 		noticeRepository.editNotice(notice);
 	}
 

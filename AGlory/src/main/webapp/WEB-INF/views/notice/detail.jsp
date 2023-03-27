@@ -36,7 +36,7 @@
 			<div class="card">
 				<!-- card-header -->
 				<div class="card-header">
-					<h3 class="card-title">공지</h3>
+					<h3 class="card-title">[${notice.ncate }] ${notice.ntitle }</h3>
 					<div class="card-tools">
 						<button type="button" class="btn btn-tool" data-card-widget="collapse" title="Collapse">
 							<i class="fas fa-minus"></i>
@@ -58,7 +58,6 @@
 										<span class="username">${notice.nwriter }</span> 
 										<span class="description">${notice.ndate }</span>
 									</div>
-									<p>[${notice.ncate }] ${notice.ntitle }</p>
 									<p>${notice.ncontent }</p>
 								</div>
 							</div>
@@ -68,8 +67,8 @@
 				<!-- END card-body -->
 				<!-- card-footer -->
 				<div class="card-footer">
-					<input type="button" class="btn btn-outline-primary" value="수정" />
-					<input type="button" class="btn btn-outline-warning" value="삭제" />
+					<input type="button" onclick="location.href='/notice/edit?nid=${notice.nid}'" class="btn btn-outline-primary" value="수정" />
+					<input type="button" onclick="javascript:removeNotice('${notice.nid}')" class="btn btn-outline-warning" value="삭제" />
 					<input type="button" onclick="location.href='/notice/list'" class="btn btn-default float-right" value="목록" />
 				</div>
 				<!-- END card-footer -->
@@ -81,5 +80,27 @@
 	<!-- END content-wrapper -->
 	
 <%@ include file="../footer.jsp" %>
+<script>
+	function removeNotice(nid) {
+		$.ajax({
+			type : "POST",
+			url : "/notice/remove",
+			data : {
+				nid : nid
+			},
+			/* beforeSend : function(xhr) {
+				xhr.setRequestHeader("${_csrf.headerName}", "${_csrf.token}");
+			}, */
+			success : function(result) {
+				alert("공지가 삭제되었습니다.")
+			},
+			error : function(request, status, error) {
+				alert(request.status + " " + request.responseText);
+			}
+		})
+	
+		window.location.href('/notice/list');
+	}
+</script>
 </body>
 </html>
