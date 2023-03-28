@@ -1,4 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<%@ taglib uri="http://www.springframework.org/tags/form" prefix="form"%>
+<%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -61,20 +64,14 @@
 											<tr>
 												<td>${notice.nid}</td>
 												<td><a href="/notice/detail?nid=${notice.nid}">${notice.ntitle}</a></td>
-												<%-- <sec:authentication property="principal" var="member" />
-												<c:if test="${member.username=='admin' }"> --%>
-													<td><select
-														onchange="updateCategory('${notice.nid }', this)"
-														class="form-select form-select-sm"
-														aria-label=".form-select-sm example">
-															<option value="버그처리" ${notice.ncate=='버그처리' ? 'selected' : '' }>버그처리</option>
-															<option value="선택기능" ${notice.ncate=='선택기능' ? 'selected' : '' }>선택기능</option>
-															<option value="기타" ${notice.ncate=='기타' ? 'selected' : '' }>기타</option>
-													</select></td>
-												<%-- </c:if>
-												<c:if test="${member.username!='admin' }">
-													<td>${notice.ncate}</td>
-												</c:if> --%>
+												<td><select
+													onchange="updateCategory('${notice.nid }', this)"
+													class="form-select form-select-sm"
+													aria-label=".form-select-sm example">
+														<option value="버그처리" ${notice.ncate=='버그처리' ? 'selected' : '' }>버그처리</option>
+														<option value="선택기능" ${notice.ncate=='선택기능' ? 'selected' : '' }>선택기능</option>
+														<option value="기타" ${notice.ncate=='기타' ? 'selected' : '' }>기타</option>
+												</select></td>
 												<td>${notice.ndate}</td>
 											</tr>
 										</c:forEach>
@@ -115,8 +112,6 @@
 <script src="/resources/Admin/plugins/datatables-buttons/js/buttons.html5.min.js"></script>
 <script src="/resources/Admin/plugins/datatables-buttons/js/buttons.print.min.js"></script>
 <script src="/resources/Admin/plugins/datatables-buttons/js/buttons.colVis.min.js"></script>
-<!-- AdminLTE App -->
-<script src="/resources/Admin/dist/js/adminlte.min.js"></script>
 <!-- Page specific script -->
 <script>
 	$(function() {
@@ -139,9 +134,9 @@
 				nid : nid,
 				ncate : e.value
 			},
-			/* beforeSend : function(xhr) {
+			beforeSend : function(xhr) {
 				xhr.setRequestHeader("${_csrf.headerName}", "${_csrf.token}");
-			}, */
+			},
 			success : function(result) {
 				alert("유형 정보 변경이 완료되었습니다.")
 			},

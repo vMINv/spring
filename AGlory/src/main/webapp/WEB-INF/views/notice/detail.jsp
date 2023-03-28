@@ -67,8 +67,10 @@
 				<!-- END card-body -->
 				<!-- card-footer -->
 				<div class="card-footer">
-					<input type="button" onclick="location.href='/notice/edit?nid=${notice.nid}'" class="btn btn-outline-primary" value="수정" />
-					<input type="button" onclick="javascript:removeNotice('${notice.nid}')" class="btn btn-outline-warning" value="삭제" />
+					<%-- <c:if test="${user.authority=='ROLE_ADMIN' }"> --%>
+						<input type="button" onclick="location.href='/notice/edit?nid=${notice.nid}'" class="btn btn-outline-primary" value="수정" />
+						<input type="button" onclick="javascript:removeNotice('${notice.nid}')" class="btn btn-outline-warning" value="삭제" />
+					<%-- </c:if> --%>
 					<input type="button" onclick="location.href='/notice/list'" class="btn btn-default float-right" value="목록" />
 				</div>
 				<!-- END card-footer -->
@@ -88,10 +90,11 @@
 			data : {
 				nid : nid
 			},
-			/* beforeSend : function(xhr) {
+			beforeSend : function(xhr) {
 				xhr.setRequestHeader("${_csrf.headerName}", "${_csrf.token}");
-			}, */
+			},
 			success : function(result) {
+				window.location.href = '/notice/list';
 				alert("공지가 삭제되었습니다.")
 			},
 			error : function(request, status, error) {
@@ -99,7 +102,7 @@
 			}
 		})
 	
-		window.location.href('/notice/list');
+		window.location.href = '/notice/list';
 	}
 </script>
 </body>

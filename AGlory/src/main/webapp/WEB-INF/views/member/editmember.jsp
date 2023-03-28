@@ -3,7 +3,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>공지 수정</title>
+<title>회원 수정</title>
 <!-- Theme style -->
 <link rel="stylesheet" href="/resources/Admin/dist/css/adminlte.min.css">
 </head>
@@ -17,12 +17,12 @@
 			<div class="container-fluid">
 				<div class="row mb-2">
 					<div class="col-sm-6">
-						<h1 class="m-0">공지</h1>
+						<h1 class="m-0">회원</h1>
 					</div>
 					<div class="col-sm-6">
 						<ol class="breadcrumb float-sm-right">
 							<li class="breadcrumb-item"><a href="#">Home</a></li>
-							<li class="breadcrumb-item active">공지</li>
+							<li class="breadcrumb-item active">회원</li>
 						</ol>
 					</div>
 				</div>
@@ -37,7 +37,7 @@
 					<div class="card card-primary">
 						<!-- card-header -->
 						<div class="card-header">
-							<h3 class="card-title">공지 수정</h3>
+							<h3 class="card-title">회원 수정</h3>
 							<div class="card-tools">
 								<button type="button" class="btn btn-tool" data-card-widget="collapse" title="Collapse">
 									<i class="fas fa-minus"></i>
@@ -45,41 +45,33 @@
 							</div>
 						</div>
 						<!-- END card-header -->
-						<form:form modelAttribute="EditNotice"
-							action="./edit?${_csrf.parameterName}=${_csrf.token}"
+						<form:form modelAttribute="EditMember"
+							action="./edit?${_csrf.parameterName}=${_csrf.token}&mid=${member.mid }"
 							class="form-horizontal" 
 							method="post">
 							<fieldset>
-								<form:input path="nid" type="hidden" value="${notice.nid }" class="form-control" />
+								<form:input path="username" type="hidden" value="${member.username }" class="form-control" />
 								<!-- card-body -->
 								<!-- <sec:authentication property="principal" var="user" /> -->
 								<div class="card-body">
 									<div class="form-group">
-										<label>작성자</label>
-										<form:input path="nwriter" type="text" value="${notice.nwriter }" class="form-control" readonly="true" />
+										<label>이름</label>
+										<form:input path="mname" type="text" value="${member.mname }" class="form-control" />
 									</div>
 									<div class="form-group">
-										<label>제목</label>
-										<form:input path="ntitle" type="text" value="${notice.ntitle }" class="form-control" />
+										<label>이메일</label>
+										<form:input path="memail" type="email" value="${member.memail }" class="form-control" />
 									</div>
 									<div class="form-group">
-										<label>내용</label>
-										<form:textarea path="ncontent" id="summernote" value="${notice.ncontent }" rows="4" class="form-control" />
-									</div>
-									<div class="form-group">
-										<label>유형</label>
-										<form:select path="ncate" class="form-control custom-select">
-											<form:option value="버그처리" selected="${notice.ncate=='버그처리' ? 'true' : '' }">버그처리</form:option>
-											<form:option value="선택기능" selected="${notice.ncate=='선택기능' ? 'true' : '' }">선택기능</form:option>
-											<form:option value="기타" selected="${notice.ncate=='기타' ? 'true' : '' }">기타</form:option>
-										</form:select>
+										<label>전화번호</label>
+										<form:input path="mtel" type="tel" value="${member.mtel }" class="form-control" />
 									</div>
 								</div>
 								<!-- END card-body -->
 								<!-- card-footer -->
 								<div class="card-footer">
 									<button type="submit" class="btn btn-primary">수정</button>
-									<input type="button" onclick="location.href='/notice/detail?nid=${notice.nid}'" class="btn btn-default float-right" value="취소" />
+									<input type="button" onclick="location.href='/member/detail?mid=${member.mid}'" class="btn btn-default float-right" value="취소" />
 								</div>
 								<!-- END card-footer -->
 							</fieldset>
@@ -94,21 +86,5 @@
 	<!-- END content-wrapper -->
 	
 <%@ include file="../footer.jsp" %>
-<script>
-	$('#summernote').summernote({
-	  placeholder: '작성글',
-	  tabsize: 2,
-	  height: 120,
-	  toolbar: [
-	    ['style', ['style']],
-	    ['font', ['bold', 'underline', 'clear']],
-	    ['color', ['color']],
-	    ['para', ['ul', 'ol', 'paragraph']],
-	    ['table', ['table']],
-	    ['insert', ['link', 'picture', 'video']],
-	    ['view', ['fullscreen', 'codeview', 'help']]
-	  ]
-	});
-</script>
 </body>
 </html>

@@ -33,4 +33,24 @@ public class BoardRepositoryImpl implements BoardRepository {
 		return this.sqlSessionTemplate.selectList("board.select_reply", bid);
 	}
 
+	@Override
+	public void removeBoard(String bid) {
+		this.sqlSessionTemplate.delete("board.delete_board", bid);
+	}
+	
+	@Override
+	public void removeReply(String bid) {
+		this.sqlSessionTemplate.delete("board.delete_reply", bid);
+	}
+
+	@Override
+	public void editStatus(Map<String, Object> status) {
+		this.sqlSessionTemplate.update("board.update_status", status);
+	}
+
+	@Override
+	public void editBoard(Board board) {
+		this.sqlSessionTemplate.update("board.update_board", board);
+	}
+
 }

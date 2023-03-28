@@ -52,6 +52,7 @@
 										<th>작성자</th>
 										<th>제목</th>
 										<th>유형</th>
+										<th>상태</th>
 										<th>작성일</th>
 									</tr>
 								</thead>
@@ -62,19 +63,20 @@
 											<td>${board.bwriter}</td>
 											<td><a href="/board/detail?bid=${board.bid}">${board.btitle}</a></td>
 											<td>${board.bcate}</td>
+												<td><select
+													onchange="updateStatus('${board.bid }', this)"
+													class="form-select form-select-sm"
+													aria-label=".form-select-sm example">
+														<option value="1" ${board.bstatus=='1' ? 'selected' : '' }>1 : 신청완료</option>
+														<option value="2" ${board.bstatus=='2' ? 'selected' : '' }>2 : 접수완료</option>
+														<option value="3" ${board.bstatus=='3' ? 'selected' : '' }>3 : 처리중</option>
+														<option value="4" ${board.bstatus=='4' ? 'selected' : '' }>4 : 처리완료</option>
+														<option value="5" ${board.bstatus=='5' ? 'selected' : '' }>5 : 후속조치</option>
+												</select></td>
 											<td>${board.bdate}</td>
 										</tr>
 									</c:forEach>
 								</tbody>
-								<tfoot>
-									<tr>
-										<th>번호</th>
-										<th>작성자</th>
-										<th>제목</th>
-										<th>유형</th>
-										<th>작성일</th>
-									</tr>
-								</tfoot>
 							</table>
 						</div>
 						<!-- END card-body -->
@@ -102,8 +104,6 @@
 <script src="/resources/Admin/plugins/datatables-buttons/js/buttons.html5.min.js"></script>
 <script src="/resources/Admin/plugins/datatables-buttons/js/buttons.print.min.js"></script>
 <script src="/resources/Admin/plugins/datatables-buttons/js/buttons.colVis.min.js"></script>
-<!-- AdminLTE App -->
-<script src="/resources/Admin/dist/js/adminlte.min.js"></script>
 <!-- Page specific script -->
 <script>
 	$(function() {
@@ -117,6 +117,28 @@
 			}
 		).buttons().container().appendTo('#example1_wrapper .col-md-6:eq(0)');
 	});
+	
+	function updateStatus(bid, e) {
+		$.ajax({
+			type : "POST",
+			url : "/board/list",
+			data : {
+				bid : bid,
+				bstatus : e.value
+			},
+			beforeSend : function(xhr) {
+				xhr.setRequestHeader("${_csrf.headerName}", "${_csrf.token}");
+			},
+			success : function(result) {
+				alert("상태 정보 변경이 완료되었습니다.")
+			},
+			error : function(request, status, error) {
+				alert(request.status + " " + request.responseText);
+			}
+		})
+
+		window.location.reload();
+	}
 </script>
 </body>
 </html>

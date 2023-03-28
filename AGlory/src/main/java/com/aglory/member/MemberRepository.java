@@ -1,6 +1,7 @@
 package com.aglory.member;
 
 import java.util.List;
+import java.util.Map;
 
 public interface MemberRepository {
 
@@ -12,15 +13,15 @@ public interface MemberRepository {
 	
 	Member getMemberById(String mid);//회원 하나 
 	
-//	//U
-//	void updateBoard(Map<String, Object> board);//회원 수정 
-//
-//	//D
-//	void removeBoard(String bid);//회원 삭제 
+	//U
+	void editAuth(Map<String, Object> auth);//회원 권한 수정
+
+	void editEnabled(Map<String, Object> enabled);//회원 권한 수정
 	
-//	void removeUser(String username);
-//	
-//	void updateAuth(Map<String, Object> auth);
-//	
+	void editMember(Member member);//회원 정보 수정 
+
+	//D
+	void removeMember(String mid);//회원 삭제 
+	
 //	User existUsername(String email);
 }

@@ -14,11 +14,14 @@ public interface BoardService {
 	Board getBoardById(String bid);
 	
 	List<Board> getReplyById(String bid);
-
-//	void updateBoard(Map<String, Object> board);
-//	
-//	void updateReply(Map<String, Object> reply);
-//	
-//	void removeBoard(String bid);
 	
+	void editStatus(Map<String, Object> status);
+	
+	void editBoard(Board board);
+
+	//	void updateReply(Map<String, Object> reply);
+	
+	void removeBoard(String bid);
+	
+	void removeReply(String bid);
 }

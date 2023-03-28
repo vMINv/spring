@@ -17,12 +17,15 @@ public interface BoardRepository {
 	
 	List<Board> getReplyById(String bid);//댓글 전체 목록 
 
-//	//U
-//	void updateBoard(Map<String, Object> board);//게시물 수정 
-//	
-//	void updateReply(Map<String, Object> reply);//댓글 내용 수정 
-//	
-//	//D
-//	void removeBoard(String bid);//게시물 삭제 
+	//U
+	void editStatus(Map<String, Object> status);//게시물 상태 수정
 	
+	void editBoard(Board board);//게시글 수정
+	
+//	void updateReply(Map<String, Object> reply);//댓글 내용 수정 
+
+	//D
+	void removeBoard(String bid);//게시글 삭제 
+	
+	void removeReply(String bid);//댓글 삭제 
 }

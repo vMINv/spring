@@ -31,4 +31,42 @@
 			WHERE mid = #{mid}
 		]]>
 	</select>
+	
+	<update id="update_member"
+			parameterType="com.aglory.member.Member">
+		<![CDATA[
+			UPDATE glorymember 
+			SET 
+			mname = #{mname},
+			memail = #{memail},
+			mtel = #{mtel}
+			WHERE username = #{username}			
+		]]>
+	</update>
+	
+	<update id="update_auth"
+			parameterType="hashMap">
+		<![CDATA[
+			UPDATE glorymember
+			SET authority = #{authority}
+			WHERE username = #{username}			
+		]]>
+	</update>
+	
+	<update id="update_enabled"
+			parameterType="hashMap">
+		<![CDATA[
+			UPDATE glorymember
+			SET enabled = #{enabled}
+			WHERE username = #{username}			
+		]]>
+	</update>
+	
+	<delete id="delete"
+			parameterType="String">
+		<![CDATA[
+			DELETE FROM glorymember 
+			WHERE mid = #{mid}			
+		]]>
+	</delete>
 </mapper>

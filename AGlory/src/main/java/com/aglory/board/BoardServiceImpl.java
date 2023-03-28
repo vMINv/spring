@@ -32,4 +32,24 @@ public class BoardServiceImpl implements BoardService {
 		return boardRepository.getReplyById(bid);
 	}
 
+	@Override
+	public void removeBoard(String bid) {
+		boardRepository.removeBoard(bid);
+	}
+
+	@Override
+	public void removeReply(String bid) {
+		boardRepository.removeReply(bid);
+	}
+
+	@Override
+	public void editStatus(Map<String, Object> status) {
+		boardRepository.editStatus(status);
+	}
+
+	@Override
+	public void editBoard(Board board) {
+		boardRepository.editBoard(board);
+	}
+
 }

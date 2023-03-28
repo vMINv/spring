@@ -1,6 +1,7 @@
 package com.aglory.member;
 
 import java.util.List;
+import java.util.Map;
 
 public interface MemberService {
 
@@ -9,8 +10,14 @@ public interface MemberService {
 	List<Member> getAllMemberList(); 
 	
 	Member getMemberById(String mid); 
+	
+	void editAuth(Map<String, Object> auth);
+	
+	void editEnabled(Map<String, Object> enabled);
+	
+	void editMember(Member member);
+	
+	void removeMember(String mid);
 		
 //	void updateBoard(Map<String, Object> board); 
-//
-//	void removeBoard(String bid); 
 }

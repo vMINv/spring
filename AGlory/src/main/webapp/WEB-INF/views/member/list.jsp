@@ -53,6 +53,7 @@
 										<th>이름</th>
 										<th>Auth</th>
 										<th>Enabled</th>
+										<th>삭제</th>
 									</tr>
 								</thead>
 								<tbody>
@@ -61,20 +62,26 @@
 											<td>${member.mid}</td>
 											<td><a href="/member/detail?mid=${member.mid}">${member.username}</a></td>
 											<td>${member.mname}</td>
-											<td>${member.authority}</td>
-											<td>${member.enabled}</td>
+											<td><select
+												onchange="updateAuth('${member.username }', this)"
+												class="form-select form-select-sm"
+												aria-label=".form-select-sm example">
+													<option value="ROLE_USER" ${member.authority=='ROLE_USER' ? 'selected' : '' }>ROLE_USER</option>
+													<option value="ROLE_MANAGER" ${member.authority=='ROLE_MANAGER' ? 'selected' : '' }>ROLE_MANAGER</option>
+													<option value="ROLE_ADMIN" ${member.authority=='ROLE_ADMIN' ? 'selected' : '' }>ROLE_ADMIN</option>
+											</select></td>
+											<td><select
+												onchange="updateEnabled('${member.username }', this)"
+												class="form-select form-select-sm"
+												aria-label=".form-select-sm example">
+													<option value="0" ${member.enabled=='0' ? 'selected' : '' }>0</option>
+													<option value="1" ${member.enabled=='1' ? 'selected' : '' }>1</option>
+													<option value="2" ${member.enabled=='2' ? 'selected' : '' }>2</option>
+											</select></td>
+											<td><button class="btn btn-outline-primary" onclick="removeMember('${member.mid}')">삭제</button></td>
 										</tr>
 									</c:forEach>
 								</tbody>
-								<tfoot>
-									<tr>
-										<th>번호</th>
-										<th>아이디</th>
-										<th>이름</th>
-										<th>Auth</th>
-										<th>Enabled</th>
-									</tr>
-								</tfoot>
 							</table>
 						</div>
 						<!-- END card-body -->
@@ -102,8 +109,6 @@
 <script src="/resources/Admin/plugins/datatables-buttons/js/buttons.html5.min.js"></script>
 <script src="/resources/Admin/plugins/datatables-buttons/js/buttons.print.min.js"></script>
 <script src="/resources/Admin/plugins/datatables-buttons/js/buttons.colVis.min.js"></script>
-<!-- AdminLTE App -->
-<script src="/resources/Admin/dist/js/adminlte.min.js"></script>
 <!-- Page specific script -->
 <script>
 	$(function() {
@@ -117,6 +122,71 @@
 			}
 		).buttons().container().appendTo('#example1_wrapper .col-md-6:eq(0)');
 	});
+	
+	function updateAuth(username, e) {
+		$.ajax({
+			type : "POST",
+			url : "/member/updateAuth",
+			data : {
+				username : username,
+				authority : e.value
+			},
+			beforeSend : function(xhr) {
+				xhr.setRequestHeader("${_csrf.headerName}", "${_csrf.token}");
+			},
+			success : function(result) {
+				alert("권한 변경이 완료되었습니다.")
+			},
+			error : function(request, status, error) {
+				alert(request.status + " " + request.responseText);
+			}
+		})
+
+		window.location.reload();
+	}
+	
+	function updateEnabled(username, e) {
+		$.ajax({
+			type : "POST",
+			url : "/member/updateEnabled",
+			data : {
+				username : username,
+				enabled : e.value
+			},
+			beforeSend : function(xhr) {
+				xhr.setRequestHeader("${_csrf.headerName}", "${_csrf.token}");
+			},
+			success : function(result) {
+				alert("변경이 완료되었습니다.")
+			},
+			error : function(request, status, error) {
+				alert(request.status + " " + request.responseText);
+			}
+		})
+
+		window.location.reload();
+	}
+	
+	function removeMember(mid) {
+		$.ajax({
+			type : "POST",
+			url : "/member/remove",
+			data : {
+				mid : mid
+			},
+			beforeSend : function(xhr) {
+				xhr.setRequestHeader("${_csrf.headerName}", "${_csrf.token}");
+			},
+			success : function(result) {
+				alert("회원이 삭제되었습니다.")
+			},
+			error : function(request, status, error) {
+				alert(request.status + " " + request.responseText);
+			}
+		})
+	
+		window.location.reload();
+	}
 </script>
 </body>
 </html>

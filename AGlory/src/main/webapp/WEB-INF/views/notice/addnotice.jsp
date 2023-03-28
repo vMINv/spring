@@ -94,8 +94,6 @@
 	<!-- END content-wrapper -->
 	
 <%@ include file="../footer.jsp" %>
-<!-- AdminLTE App -->
-<script src="/resources/Admin/dist/js/adminlte.min.js"></script>
 <script>
 	$('#summernote').summernote({
 	  placeholder: '입력란을 반드시 채워주세요.',

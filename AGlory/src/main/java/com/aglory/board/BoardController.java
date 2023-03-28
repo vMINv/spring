@@ -55,6 +55,11 @@ public class BoardController {
 	    return "board/list";
 	}
 	
+	@PostMapping("/list")
+	public void editStatus(@RequestParam Map<String, Object> status) {// Map 여러개 바뀜 
+		boardService.editStatus(status);
+	}
+	
 	@GetMapping("/detail")
 	public String requestBoardById(@RequestParam("bid") String bid, Model model) {
 		// 주 게시물
@@ -66,15 +71,6 @@ public class BoardController {
 		int cnt = list.size();
 		model.addAttribute("replyList",list);
 		model.addAttribute("cnt", cnt);
-		
-		// 폼을 띄우기 전에 조회수 하나 증가
-		
-//		Map<String, Object> map = new HashMap<String, Object>();
-//		
-//			map.put("check","bview");
-//			map.put("bid",bid);
-//		
-//		boardService.checkBoard(map);
 		
 		return "board/detail";
 	}
@@ -96,5 +92,32 @@ public class BoardController {
 //		
 //		mailService.sendMail(to, subject, body);
 		
+	}
+	
+	@ResponseBody
+	@RequestMapping("/removeboard")
+	public void removeboard(@RequestParam("bid") String bid) {// String 하나 바뀜 
+		boardService.removeBoard(bid);
+	}
+	
+	@ResponseBody
+	@RequestMapping("/removereply")
+	public void removeReply(@RequestParam("bid") String bid) {// String 하나 바뀜 
+		boardService.removeReply(bid);
+	}
+	
+	@GetMapping("/edit")
+	public String requestEditboard(@RequestParam("bid") String bid, Model model, @ModelAttribute("EditBoard") Board board) {
+		Board boardById = boardService.getBoardById(bid);
+		model.addAttribute("board", boardById);
+
+		return "board/editboard";
+	}
+	
+	@PostMapping("/edit")
+	public String submitEditboard(@ModelAttribute("EditBoard") Board board) {
+		boardService.editBoard(board);
+		
+		return "redirect:/board/list";
 	}
 }
