@@ -1,5 +1,9 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8"%>
+    pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<%@ taglib uri="http://www.springframework.org/tags/form" prefix="form"%> 
+<%@ taglib prefix="sec"
+	uri="http://www.springframework.org/security/tags"%>    
 
 <!DOCTYPE html>
 
@@ -220,11 +224,32 @@
 
 							<div class="card card-primary card-outline">
 								<div class="card-body">
-									<h5 class="card-title">Card title</h5>
-									<p class="card-text">Some quick example text to build on
-										the card title and make up the bulk of the card's content.</p>
-									<a href="#" class="card-link">Card link</a> <a href="#"
-										class="card-link">Another link</a>
+									
+								<table id="example2" class="table table-bordered table-striped">
+									<thead>
+										<tr>
+											<th>번호</th>
+											<th>분류</th>
+											<th>제목</th>
+											<th>상태</th>
+										</tr>
+									</thead>
+									<tbody>
+										<c:forEach items="${boardList}" var="board">
+											<tr>
+												<td>${board.bid}</td>
+												<td>${board.bcate}</td>
+												<td><a href="/board/detail?bid=${board.bid}">${board.btitle}</a>
+												</td>
+												<td>${board.bstatus}</td>
+											</tr>
+										</c:forEach>
+									</tbody>
+		
+								</table>
+
+
+
 								</div>
 							</div>
 							
@@ -278,12 +303,58 @@
 
 
 
-	<script src="/resources/Admin/plugins/jquery/jquery.min.js"></script>
+<script src="/resources/Admin/plugins/jquery/jquery.min.js"></script>
+<script src="/resources/Admin/plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
+<script src="/resources/Admin/dist/js/adminlte.min.js?v=3.2.0"></script>
+<script src="/resources/Admin/dist/js/demo.js"></script>
 
-	<script src="/resources/Admin/plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
+<script
+	src="/resources/Admin/plugins/datatables/jquery.dataTables.min.js"></script>
+<script
+	src="/resources/Admin/plugins/datatables-bs4/js/dataTables.bootstrap4.min.js"></script>
+<script
+	src="/resources/Admin/plugins/datatables-responsive/js/dataTables.responsive.min.js"></script>
+<script
+	src="/resources/Admin/plugins/datatables-responsive/js/responsive.bootstrap4.min.js"></script>
+<script
+	src="/resources/Admin/plugins/datatables-buttons/js/dataTables.buttons.min.js"></script>
+<script
+	src="/resources/Admin/plugins/datatables-buttons/js/buttons.bootstrap4.min.js"></script>
+<script src="/resources/Admin/plugins/jszip/jszip.min.js"></script>
+<script src="/resources/Admin/plugins/pdfmake/pdfmake.min.js"></script>
+<script src="/resources/Admin/plugins/pdfmake/vfs_fonts.js"></script>
+<script
+	src="/resources/Admin/plugins/datatables-buttons/js/buttons.html5.min.js"></script>
+<script
+	src="/resources/Admin/plugins/datatables-buttons/js/buttons.print.min.js"></script>
+<script
+	src="/resources/Admin/plugins/datatables-buttons/js/buttons.colVis.min.js"></script>
 
-	<script src="/resources/Admin/dist/js/adminlte.min.js?v=3.2.0"></script>
 
-	<script src="/resources/Admin/dist/js/demo.js"></script>
+
+
+
+<script>
+	$(function() {
+		$("#example1").DataTable(
+				{
+					"responsive" : true,
+					"lengthChange" : false,
+					"autoWidth" : false,
+					"buttons" : [ "copy", "csv", "excel", "pdf", "print",
+							"colvis" ]
+				}).buttons().container().appendTo(
+				'#example1_wrapper .col-md-6:eq(0)');
+		$('#example2').DataTable({
+			"paging" : true,
+			"lengthChange" : false,
+			"searching" : false,
+			"ordering" : true,
+			"info" : true,
+			"autoWidth" : false,
+			"responsive" : true,
+		});
+	});
+</script>
 </body>
 </html>
