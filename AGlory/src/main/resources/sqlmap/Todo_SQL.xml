@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE  mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="todo">
+
+	<insert id="insert" 
+			parameterType="com.aglory.main.Todo"
+			useGeneratedKeys="true" 
+			keyProperty="tid">
+		<![CDATA[
+			INSERT INTO glorytodo
+			(todo, tdue)
+			VALUES
+			(#{todo}, #{tdue})
+		]]>
+	</insert>
+	
+	<select id="select_list" 
+			parameterType="String"
+			resultType="com.aglory.main.Todo">
+		<![CDATA[
+			SELECT * 
+			FROM glorytodo 
+			ORDER BY tdue DESC
+		]]>
+	</select>
+	
+	<delete id="delete"
+			parameterType="String">
+		<![CDATA[
+			DELETE FROM glorytodo 
+			WHERE tid = #{tid}			
+		]]>
+	</delete>
+	
+</mapper>

@@ -189,12 +189,12 @@
 								</p>
 						</a>
 							<ul class="nav nav-treeview">
-								<li class="nav-item"><a href="#" class="nav-link active">
+								<li class="nav-item"><a href="/notice/list" class="nav-link active">
 										<i class="far fa-circle nav-icon"></i>
 										<p>공지 목록</p>
 								</a></li>
 								<c:if test="${user.username=='admin' }">
-									<li class="nav-item"><a href="#" class="nav-link"> <i
+									<li class="nav-item"><a href="/notice/addnotice" class="nav-link"> <i
 											class="far fa-circle nav-icon"></i>
 											<p>공지 등록</p>
 									</a></li>
@@ -209,11 +209,11 @@
 								</p>
 						</a>
 							<ul class="nav nav-treeview">
-								<li class="nav-item"><a href="#" class="nav-link active">
+								<li class="nav-item"><a href="/board/list" class="nav-link active">
 										<i class="far fa-circle nav-icon"></i>
 										<p>게시판 목록</p>
 								</a></li>
-								<li class="nav-item"><a href="#" class="nav-link"> <i
+								<li class="nav-item"><a href="/board/addboard" class="nav-link"> <i
 										class="far fa-circle nav-icon"></i>
 										<p>게시판 등록</p>
 								</a></li>
@@ -228,11 +228,11 @@
 									</p>
 							</a>
 								<ul class="nav nav-treeview">
-									<li class="nav-item"><a href="#" class="nav-link active">
+									<li class="nav-item"><a href="/member/list" class="nav-link active">
 											<i class="far fa-circle nav-icon"></i>
 											<p>회원 목록</p>
 									</a></li>
-									<li class="nav-item"><a href="#" class="nav-link"> <i
+									<li class="nav-item"><a href="/member/addmember" class="nav-link"> <i
 											class="far fa-circle nav-icon"></i>
 											<p>회원 가입</p>
 									</a></li>

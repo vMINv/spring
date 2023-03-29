@@ -55,7 +55,7 @@
 								<div class="card-body">
 									<div class="form-group">
 										<label>작성자</label>
-										<form:input path="nwriter" type="text" value="admin" class="form-control" readonly="true" />
+										<form:input path="nwriter" type="text" value="관리자" class="form-control" readonly="true" />
 									</div>
 									<div class="form-group">
 										<label>제목</label>

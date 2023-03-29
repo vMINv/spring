@@ -46,7 +46,7 @@
 							<div class="card-body">
 								<div class="form-group">
 									<label>작성자</label>
-									<form:input path="bwriter" type="text" value="admin" class="form-control" readonly="true" />
+									<form:input path="bwriter" type="text" value="${user.username }" class="form-control" readonly="true" />
 								</div>
 								<div class="form-group">
 									<label>제목</label> 
