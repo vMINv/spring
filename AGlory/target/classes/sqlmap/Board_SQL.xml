@@ -14,6 +14,18 @@
 		]]>
 	</insert>
 
+	<insert id="insert_x" 
+			parameterType="hashmap"
+			useGeneratedKeys="true" 
+			keyProperty="bid"><!-- 전부 -->
+		<![CDATA[
+			INSERT INTO gloryboard
+			(btitle, bcontent, bcate, bwriter)
+			VALUES
+			(#{btitle}, #{bcontent}, #{bcate}, #{bwriter})
+		]]>
+	</insert>
+
 	<insert id="insert_reply" 
 			parameterType="hashMap"
 			useGeneratedKeys="true" 

@@ -16,6 +16,10 @@ public class BoardServiceImpl implements BoardService {
 		boardRepository.setNewBoard(board);
 	}
 	
+	public void setNewBoardx(Map map) {
+		boardRepository.setNewBoardx(map);
+	}
+	
 	public List<Board> getAllBoardList() {
 		return boardRepository.getAllBoardList();
 	}

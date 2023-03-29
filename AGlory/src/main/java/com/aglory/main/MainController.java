@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -16,6 +17,8 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.aglory.board.Board;
 import com.aglory.board.BoardService;
+import com.aglory.notice.Notice;
+import com.aglory.notice.NoticeService;
 
 @Controller
 public class MainController {
@@ -24,18 +27,29 @@ public class MainController {
 	BoardService boardService;
 	
 	@Autowired
+	NoticeService noticeService;
+	
+	@Autowired
 	SqlSessionTemplate sqlSessionTemplate;
 	
 	@RequestMapping("/main")
 	public String main(Model model) {
-	    List<Board> list = boardService.getAllBoardList();
-	    model.addAttribute("boardList", list);
+	    List<Board> boardList = boardService.getAllBoardList();
+	    model.addAttribute("boardList", boardList);
 
+	    List<Notice> noticeList = noticeService.getAllNoticeList();
+	    model.addAttribute("noticeList", noticeList);
+	    
 		return "main";
 	}
 	
 	@RequestMapping("/")
 	public String loginMain() {
+		return "login";
+	}
+	
+	@RequestMapping("/logout")
+	public String logoutMain() {
 		return "login";
 	}
 	
@@ -82,9 +96,16 @@ public class MainController {
 		return "admin";
 	}
 	
-	@RequestMapping(value = "/detailajax", method = RequestMethod.POST)
+	@RequestMapping(value = "/detailBoardajax", method = RequestMethod.POST)
 	public @ResponseBody List<Board> requestBoardByIdAjax(@RequestParam("bid") String bid, @ModelAttribute Board board) {
 		return boardService.getReplyById(bid);
+	}
+	
+	@ResponseBody
+	@RequestMapping("/addboardx")
+	public void replynew(@RequestParam Map<String, Object> map) {
+		
+		boardService.setNewBoardx(map);
 	}
 	
 	@ResponseBody

@@ -8,6 +8,8 @@ public interface BoardRepository {
 	//C
 	void setNewBoard(Board board);//게시물 작성 
 	
+	void setNewBoardx(Map map);//게시물 작성 
+	
 	void replynewBoard(Map map);//댓글 작성 
 
 	//R

@@ -17,6 +17,10 @@ public class BoardRepositoryImpl implements BoardRepository {
 		this.sqlSessionTemplate.insert("board.insert", board);
 	}
 	
+	public void setNewBoardx(Map map) {
+		this.sqlSessionTemplate.insert("board.insert_x", map);
+	}
+	
 	public List<Board> getAllBoardList() {
 		return this.sqlSessionTemplate.selectList("board.select_list");
 	}

@@ -7,6 +7,8 @@ public interface BoardService {
 
 	void setNewBoard(Board board);
 	
+	void setNewBoardx(Map map);
+	
 	void replynewBoard(Map map);
 
 	List<Board> getAllBoardList();
