@@ -23,5 +23,5 @@ public interface MemberRepository {
 	//D
 	void removeMember(String mid);//회원 삭제 
 	
-//	User existUsername(String email);
+	Member existUsername(String username);
 }

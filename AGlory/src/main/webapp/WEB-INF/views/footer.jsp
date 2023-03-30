@@ -37,7 +37,6 @@
 <script src="/resources/Admin/plugins/overlayScrollbars/js/jquery.overlayScrollbars.min.js"></script>
 <script src="/resources/Admin/dist/js/adminlte.js?v=3.2.0"></script>
 <!-- AdminLTE for demo purposes -->
-<script src="/resources/Admin/dist/js/demo.js"></script>
 <script src="/resources/Admin/dist/js/pages/dashboard.js"></script>
 </body>
 </html>

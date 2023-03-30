@@ -31,6 +31,16 @@
 			WHERE mid = #{mid}
 		]]>
 	</select>
+
+	<select id="select_one" 
+			parameterType="String"
+			resultType="com.aglory.member.Member">
+		<![CDATA[
+			SELECT * 
+			FROM glorymember 
+			WHERE username = #{username}
+		]]>
+	</select>
 	
 	<update id="update_member"
 			parameterType="com.aglory.member.Member">

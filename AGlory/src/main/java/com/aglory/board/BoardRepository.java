@@ -3,6 +3,8 @@ package com.aglory.board;
 import java.util.List;
 import java.util.Map;
 
+import com.aglory.member.Member;
+
 public interface BoardRepository {
 
 	//C
@@ -30,4 +32,5 @@ public interface BoardRepository {
 	void removeBoard(String bid);//게시글 삭제 
 	
 	void removeReply(String bid);//댓글 삭제 
+	
 }

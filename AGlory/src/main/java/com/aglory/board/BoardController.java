@@ -14,6 +14,10 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.aglory.main.MailService;
+import com.aglory.member.Member;
+import com.aglory.member.MemberService;
+
 @Controller
 @RequestMapping("/board")
 public class BoardController {
@@ -21,11 +25,11 @@ public class BoardController {
 	@Autowired
 	private BoardService boardService;
 	
-//	@Autowired
-//	private MailService mailService;
-//	
-//	@Autowired
-//	private MemberService memberService;
+	@Autowired
+	private MailService mailService;
+	
+	@Autowired
+	private MemberService memberService;
 	
 	@GetMapping("/addboard")
 	public String requestAddBoardForm(@ModelAttribute("NewBoard") Board board) {
@@ -37,11 +41,11 @@ public class BoardController {
 		
 		boardService.setNewBoard(board);
 		
-//		User user = userService.existUsername(board.getBwriter());
+////		User user = userService.existUsername(board.getBwriter());
 //		
-//		String to = user.getUemail();
-//		String subject = board.getBwriter() + " 님이 게시판에 글을 등록하셨습니다.";
-//		String body = board.getBcontent();
+////		String to = "hyunmin04050@gmail.com";
+////		String subject = board.getBwriter() + " 님이 게시판에 글을 등록하셨습니다.";
+////		String body = board.getBcontent();
 //		
 //		mailService.sendMail(to, subject, body);
 		
@@ -80,18 +84,17 @@ public class BoardController {
 	@RequestMapping("/replynew")
 	public void replynew(@RequestParam Map<String, Object> map) {
 		
-		String rpid = (String)map.get("rpwriter");
 		String bpid = (String)map.get("bpwriter");
 
 		boardService.replynewBoard(map);
 
-//		User user = userService.existUsername(bpid);
-//		
-//		String to = user.getUemail();
-//		String subject = bpid + " 님의 글에 댓글이 달렸습니다.";
-//		String body = (String)map.get("bcontent");
-//		
-//		mailService.sendMail(to, subject, body);
+		Member member = memberService.existUsername(bpid);
+		
+		String to = member.getMemail();
+		String subject = bpid + " 님의 글에 댓글이 달렸습니다.";
+		String body = (String)map.get("bcontent");
+		
+		mailService.sendMail(to, subject, body);
 		
 	}
 	

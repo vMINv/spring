@@ -2,6 +2,7 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ taglib uri="http://www.springframework.org/tags/form" prefix="form"%> 
 <%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags"%>      
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -277,9 +278,8 @@
 													<td>${board.bcate}</td>
 													<td>${board.btitle}</td>
 													<td>${board.bstatus}</td>
-													<td><a
-														href="javascript:detailBoard('${board.bid}', '${board.btitle}', '${board.bcontent}')"
-														class="btn-outline-primary btn-sm">보기</a></td>
+													<td><a href='javascript:detailBoard("${board.bid}", "${fn:replace(board.btitle, '"', '\\"')}", "${fn:replace(board.bcontent, '"', '\\"')}")'
+                                                    class="btn-outline-primary btn-sm">보기</a></td>
 												</tr>
 											</c:forEach>
 										</tbody>
@@ -473,13 +473,13 @@ function detailBoard(id, title, msg) {
 
 						var str = "";
 						for(var i in result){
-							str+='				<table id="example3"><li class="list-group-item">';
+							str+='				<li class="list-group-item">';
 							str+='					<div class="list-group-item list-group-item-secondary small">';
 							str+='						<span>' + result[i].bwriter +  '</span>';
 							str+='						<span class="small float-end"> [' + result[i].bdate + ']</span>';
 							str+='					</div>';
 							str+='					<div class="list-group-item">' + result[i].bcontent + '</div>';
-							str+='				</li></table>';
+							str+='				</li>';
 						}
 						$(".replies").html(str);
 						document.getElementById('replies').innerHTML=str;	

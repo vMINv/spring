@@ -230,6 +230,13 @@
 							</div>
 					</section>
 						</div>
+						
+						
+						
+						
+						
+						
+						
 						<div class="col-lg-6">
 					<section>
 						<div class="card direct-chat direct-chat-primary">
@@ -253,77 +260,46 @@
 							</div>
 
 							<div class="card-body">
-
+<!------------------------------------  -->
 								<div class="direct-chat-messages">
 
-									<div class="direct-chat-msg">
-										<div class="direct-chat-infos clearfix">
-											<span class="direct-chat-name float-left">Alexander
-												Pierce</span> <span class="direct-chat-timestamp float-right">23
-												Jan 2:00 pm</span>
-										</div>
+									<c:forEach items="${chatList}" var="chat" varStatus="status">
+										
+										<c:if test="${chat.bwriter!='admin' }">
+											<div class="direct-chat-msg">
+												<div class="direct-chat-infos clearfix">
+													<span class="direct-chat-name float-left">${chat.bwriter }</span>
+													<span class="direct-chat-timestamp float-right">
+														${chat.bdate }</span>
+												</div>
+												<img class="direct-chat-img"
+													src="/resources/Admin/dist/img/user1-128x128.jpg"
+													alt="message user image">
+												<div class="direct-chat-text">${chat.bcontent }</div>
+											</div>
+										</c:if>
 
-										<img class="direct-chat-img"
-											src="/resources/Admin/dist/img/user1-128x128.jpg"
-											alt="message user image">
+										<c:if test="${chat.bwriter=='admin' }">
+											<div class="direct-chat-msg right">
+												<div class="direct-chat-infos clearfix">
+													<span class="direct-chat-name float-right">Admin</span> <span
+														class="direct-chat-timestamp float-left">${chat.bdate }</span>
+												</div>
+												<img class="direct-chat-img"
+													src="/resources/Admin/dist/img/user3-128x128.jpg"
+													alt="message user image">
+												<div class="direct-chat-text">${chat.bcontent }</div>
+											</div>
+										</c:if>
 
-										<div class="direct-chat-text">Is this template really
-											for free? That's unbelievable!</div>
-
-									</div>
-
-
-									<div class="direct-chat-msg right">
-										<div class="direct-chat-infos clearfix">
-											<span class="direct-chat-name float-right">Sarah
-												Bullock</span> <span class="direct-chat-timestamp float-left">23
-												Jan 2:05 pm</span>
-										</div>
-
-										<img class="direct-chat-img"
-											src="/resources/Admin/dist/img/user3-128x128.jpg"
-											alt="message user image">
-
-										<div class="direct-chat-text">You better believe it!</div>
-
-									</div>
-
-
-									<div class="direct-chat-msg">
-										<div class="direct-chat-infos clearfix">
-											<span class="direct-chat-name float-left">Alexander
-												Pierce</span> <span class="direct-chat-timestamp float-right">23
-												Jan 5:37 pm</span>
-										</div>
-
-										<img class="direct-chat-img"
-											src="/resources/Admin/dist/img/user1-128x128.jpg"
-											alt="message user image">
-
-										<div class="direct-chat-text">Working with AdminLTE on a
-											great new app! Wanna join?</div>
-
-									</div>
+									</c:forEach>
 
 
-									<div class="direct-chat-msg right">
-										<div class="direct-chat-infos clearfix">
-											<span class="direct-chat-name float-right">Sarah
-												Bullock</span> <span class="direct-chat-timestamp float-left">23
-												Jan 6:10 pm</span>
-										</div>
 
-										<img class="direct-chat-img"
-											src="/resources/Admin/dist/img/user3-128x128.jpg"
-											alt="message user image">
-
-										<div class="direct-chat-text">I would love to.</div>
-
-									</div>
 
 								</div>
 
-
+										<!------------------------------------  -->
 								<div class="direct-chat-contacts">
 									<ul class="contacts-list">
 										<li><a href="#"> <img class="contacts-list-img"
@@ -420,6 +396,12 @@
 
 					</section>
 						</div>
+
+
+
+
+
+
 
 </div>
 				</div>

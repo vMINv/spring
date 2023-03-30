@@ -18,6 +18,8 @@ public interface MemberService {
 	void editMember(Member member);
 	
 	void removeMember(String mid);
+
+	Member existUsername(String username);
 		
 //	void updateBoard(Map<String, Object> board); 
 }

@@ -46,4 +46,9 @@ public class MemberServiceImpl implements MemberService {
 	public void editEnabled(Map<String, Object> enabled) {
 		memberRepository.editEnabled(enabled);
 	}
+
+	@Override
+	public Member existUsername(String username) {
+		return memberRepository.existUsername(username);
+	}
 }

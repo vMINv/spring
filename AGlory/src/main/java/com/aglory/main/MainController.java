@@ -4,12 +4,13 @@ import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
 
+import javax.servlet.http.HttpServletRequest;
+
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -28,6 +29,9 @@ public class MainController {
 	
 	@Autowired
 	NoticeService noticeService;
+	
+	@Autowired
+	MailService mailService;
 	
 	@Autowired
 	SqlSessionTemplate sqlSessionTemplate;
@@ -49,7 +53,7 @@ public class MainController {
 	}
 	
 	@RequestMapping("/logout")
-	public String logoutMain() {
+	public String logoutMain(HttpServletRequest req) {
 		return "login";
 	}
 	
@@ -62,6 +66,8 @@ public class MainController {
 	public String loginAdmin(Model model) {
 		//전체 테이블을 모두 조회
 		List<Board> list = boardService.getAllBoardList();
+		
+		model.addAttribute("chatList", list);
 		
 		//그 중 필요한 bstatus 만 추출   자바 버전 1.8 이상 부터만 지원
 		List<Integer> statusList = list.stream().map(Board::getBstatus).collect(Collectors.toList());
@@ -100,10 +106,20 @@ public class MainController {
 	public @ResponseBody List<Board> requestBoardByIdAjax(@RequestParam("bid") String bid, @ModelAttribute Board board) {
 		return boardService.getReplyById(bid);
 	}
+
+	@RequestMapping(value = "/detailx", method = RequestMethod.POST)
+	public @ResponseBody Board requestBoardByIdx(@RequestParam("bid") String bid) {
+		return this.sqlSessionTemplate.selectOne("board.select_detail", bid);
+	}
 	
 	@ResponseBody
 	@RequestMapping("/addboardx")
 	public void replynew(@RequestParam Map<String, Object> map) {
+		String to = "hyunmin04050@gmail.com";
+		String subject = (String)map.get("bwriter") + " 님이 게시판에 글을 등록하셨습니다.";
+		String body = (String)map.get("bcontent");
+		
+		mailService.sendMail(to, subject, body);
 		
 		boardService.setNewBoardx(map);
 	}
@@ -111,9 +127,6 @@ public class MainController {
 	@ResponseBody
 	@RequestMapping(value = "/addtodo", method = RequestMethod.POST)
 	public void addtodo(@RequestParam Map<String, Object> map) {
-		String todo = (String)map.get("todo");
-		String tdue = (String)map.get("tdue");
-		
 		this.sqlSessionTemplate.insert("todo.insert", map);
 	}
 	

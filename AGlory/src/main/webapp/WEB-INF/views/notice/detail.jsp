@@ -67,10 +67,10 @@
 				<!-- END card-body -->
 				<!-- card-footer -->
 				<div class="card-footer">
-					<%-- <c:if test="${user.authority=='ROLE_ADMIN' }"> --%>
+					<sec:authorize access="hasRole('ADMIN')">
 						<input type="button" onclick="location.href='/notice/edit?nid=${notice.nid}'" class="btn btn-outline-primary" value="수정" />
 						<input type="button" onclick="javascript:removeNotice('${notice.nid}')" class="btn btn-outline-warning" value="삭제" />
-					<%-- </c:if> --%>
+					</sec:authorize>
 					<input type="button" onclick="location.href='/notice/list'" class="btn btn-default float-right" value="목록" />
 				</div>
 				<!-- END card-footer -->

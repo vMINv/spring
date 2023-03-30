@@ -48,4 +48,9 @@ public class MemberRepositoryImpl implements MemberRepository {
 		this.sqlSessionTemplate.update("member.update_enabled", enabled);
 	}
 
+	@Override
+	public Member existUsername(String username) {
+		return this.sqlSessionTemplate.selectOne("member.select_one", username);
+	}
+
 }
