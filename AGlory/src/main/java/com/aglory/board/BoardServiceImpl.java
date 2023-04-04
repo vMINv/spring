@@ -16,7 +16,7 @@ public class BoardServiceImpl implements BoardService {
 		boardRepository.setNewBoard(board);
 	}
 	
-	public void setNewBoardx(Map map) {
+	public void setNewBoardx(Map<String, Object> map) {
 		boardRepository.setNewBoardx(map);
 	}
 	
@@ -28,7 +28,7 @@ public class BoardServiceImpl implements BoardService {
 		return boardRepository.getBoardById(bid);
 	}
 	
-	public void replynewBoard(Map map) {
+	public void replynewBoard(Map<String, Object> map) {
 		boardRepository.replynewBoard(map);
 	}
 	

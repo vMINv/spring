@@ -53,12 +53,6 @@ public class NoticeController {
 		return "notice/detail";
 	}
 	
-	@ResponseBody
-	@RequestMapping("/remove")
-	public void removeNotice(@RequestParam("nid") String nid) {// String 하나 바뀜 
-		noticeService.removeNotice(nid);
-	}
-	
 	@GetMapping("/edit")
 	public String requestEditNotice(@RequestParam("nid") String nid, Model model, @ModelAttribute("EditNotice") Notice notice) {
 		Notice noticeById = noticeService.getNoticeById(nid);
@@ -72,5 +66,11 @@ public class NoticeController {
 		noticeService.editNotice(notice);
 		
 		return "redirect:/notice/list";
+	}
+	
+	@ResponseBody
+	@RequestMapping("/remove")
+	public void removeNotice(@RequestParam("nid") String nid) {// String 하나 바뀜 
+		noticeService.removeNotice(nid);
 	}
 }

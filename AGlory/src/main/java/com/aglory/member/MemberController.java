@@ -14,8 +14,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import com.aglory.notice.Notice;
-
 @Controller
 @RequestMapping("/member")
 public class MemberController {
@@ -60,12 +58,6 @@ public class MemberController {
 		memberService.editEnabled(enabled);
 	}
 	
-	@ResponseBody
-	@RequestMapping("/remove")
-	public void removeMember(@RequestParam("mid") String mid) {// String 하나 바뀜 
-		memberService.removeMember(mid);
-	}
-	
 	@GetMapping("/detail")
 	public String requestMemberById(@RequestParam("mid") String mid, Model model) {
 		Member memberById = memberService.getMemberById(mid);
@@ -87,5 +79,11 @@ public class MemberController {
 		memberService.editMember(member);
 		
 		return "redirect:/member/detail?mid="+mid;
+	}
+	
+	@ResponseBody
+	@RequestMapping("/remove")
+	public void removeMember(@RequestParam("mid") String mid) {// String 하나 바뀜 
+		memberService.removeMember(mid);
 	}
 }

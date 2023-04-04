@@ -17,7 +17,7 @@ public class BoardRepositoryImpl implements BoardRepository {
 		this.sqlSessionTemplate.insert("board.insert", board);
 	}
 	
-	public void setNewBoardx(Map map) {
+	public void setNewBoardx(Map<String, Object> map) {
 		this.sqlSessionTemplate.insert("board.insert_x", map);
 	}
 	
@@ -29,7 +29,7 @@ public class BoardRepositoryImpl implements BoardRepository {
 		return this.sqlSessionTemplate.selectOne("board.select_detail", bid);
 	}
 
-	public void replynewBoard(Map map) {
+	public void replynewBoard(Map<String, Object> map) {
 		this.sqlSessionTemplate.insert("board.insert_reply", map);
 	}
 	

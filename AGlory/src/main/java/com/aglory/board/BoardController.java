@@ -10,7 +10,6 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
@@ -36,7 +35,7 @@ public class BoardController {
 		return "board/addboard";
 	}
 	
-	@PostMapping("/addboard")
+	@PostMapping("/addboard") 
 	public String submitAddBoardForm(@ModelAttribute("NewBoard") Board board) {
 		
 		boardService.setNewBoard(board);
@@ -60,7 +59,7 @@ public class BoardController {
 	    return "board/list";
 	}
 	
-	@PostMapping("/list")
+	@PostMapping("/list")// 게시물 상태 update 결과 넘기기 
 	public void editStatus(@RequestParam Map<String, Object> status) {// Map 여러개 바뀜 
 		boardService.editStatus(status);
 	}
@@ -95,7 +94,6 @@ public class BoardController {
 		String body = (String)map.get("bcontent");
 		
 		mailService.sendMail(to, subject, body);
-		
 	}
 	
 	@ResponseBody
@@ -124,6 +122,5 @@ public class BoardController {
 		
 		return "redirect:/board/list";
 	}
-	
 
 }
